@@ -3,8 +3,8 @@ The backend-api-template is a robust template for the quick development of backe
 
 
 # Key Features:
-* Clean Architecture: Implements the 4-layer architecture principles introduced by Robert C. Martin (Bob Martin).
-* RESTful API: Implements a RESTful API to manage an e-commerce platform, supporting CRUD operations (Create, Read, Update, Delete).
-* Modular Design: Components are organized into separate layers (Entities, Use Cases, Interface Adapters, Frameworks & Drivers), promoting modularity and reusability.
-* Scalability: With its modular design, the application can scale efficiently to accommodate future enhancements and requirements.
+* **Clean Architecture:** Implements the 4-layer architecture principles introduced by Robert C. Martin (Bob Martin).
+* **RESTful API:** Implements a RESTful API to manage an e-commerce platform, supporting CRUD operations (Create, Read, Update, Delete).
+* **Modular Design:** Components are organized into separate layers (Entities, Use Cases, Interface Adapters, Frameworks & Drivers), promoting modularity and reusability.
+* **Scalability:** With its modular design, the application can scale efficiently to accommodate future enhancements and requirements.
 
