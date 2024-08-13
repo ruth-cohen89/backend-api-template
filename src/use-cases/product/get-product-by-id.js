@@ -1,6 +1,4 @@
-const productDB = require("../data-access/product-db");
-
-const getProductById = async (productId) => {
+const getProductById = async (productDB, productId) => {
   // Add business logic here (e.g., checking if productId is valid)
   const product = await productDB.getProductById(productId);
   return product;
