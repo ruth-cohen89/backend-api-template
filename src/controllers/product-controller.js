@@ -4,7 +4,7 @@ const {
   updateProduct,
   deleteProduct,
   getAllProducts,
-} = require("../use-cases/product-use-cases");
+} = require("../use-cases/product");
 
 // Create a new product
 const createProductController = async (req, res) => {

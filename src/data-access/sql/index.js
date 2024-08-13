@@ -13,6 +13,7 @@ const dbConfig = {
 
 const mysqlConnection = new MySQLConnection(dbConfig);
 
+// TODO: change the name repo to db and export in a different way
 (async () => {
   try {
     await mysqlConnection.connect();

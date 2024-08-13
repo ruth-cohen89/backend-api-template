@@ -3,7 +3,8 @@ const {
   getUserById,
   updateUser,
   deleteUser,
-} = require("../use-cases/user-use-cases");
+  getAllUsers,
+} = require("../use-cases/user");
 
 // Create a new user
 const createUserController = async (req, res) => {
@@ -53,10 +54,21 @@ const deleteUserController = async (req, res) => {
   }
 };
 
+// Get all users
+const getAllUsersController = async (req, res) => {
+  try {
+    const users = await getAllUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 // Export all controller functions
 module.exports = {
   createUserController,
   getUserByIdController,
   updateUserController,
   deleteUserController,
+  getAllUsersController,
 };
