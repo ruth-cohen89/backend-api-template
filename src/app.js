@@ -3,16 +3,12 @@ require("dotenv").config();
 const config = require("config");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const router = require("./routes");
 
-import router from "./routes/index.js"; // Importing as 'router'
 //const AppError = require("./src/utils/appError");
 //const globalErrorHandler = require("./src/middlewares/errorHandlerMiddleware.js");
 
 const app = express();
-
-app.get("/", (req, res) => {
-  res.json("Welcome to the API :)");
-});
 
 app.use(
   cors({
@@ -36,7 +32,7 @@ app.use(bodyParser.json({ limit: "15mb" }));
 // true: allows rich objects and arrays, max 15 mb
 // app.use(bodyParser.urlencoded({ limit: "15mb", extended: true }));
 
-app.use("/api/v1", router); // All routes will be prefixed with /api/v1
+app.use("/api", router); // All routes will be prefixed with /api/v1
 
 app.all("*", (req, res, next) => {
   const error = new Error(`Can't find ${req.originalUrl} on the server 🙄`);
@@ -46,7 +42,7 @@ app.all("*", (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.err(err);
+  //console.err(err);
   res.status(err.status || 500).json({
     status: "error",
     message: err.message || "Internal Server Error",
