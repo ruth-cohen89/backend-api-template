@@ -12,6 +12,6 @@ module.exports = {
   createUser,
   getUserById,
   updateUser,
-  deleteUser,
+  removeUser,
   getAllUsers,
 };
