@@ -4,7 +4,7 @@ const productDB = require("../../data-access/sql/product-db");
 const createProduct = require("./create-product")(productDB);
 const getProductById = require("./get-product-by-id")(productDB);
 const updateProduct = require("./update-product")(productDB);
-const deleteProduct = require("./delete-product")(productDB);
+const removeProduct = require("./remove-product")(productDB);
 const getAllProducts = require("./get-all-products")(productDB);
 
 // Export all product use cases
@@ -12,6 +12,6 @@ module.exports = {
   createProduct,
   getProductById,
   updateProduct,
-  deleteProduct,
+  removeProduct,
   getAllProducts,
 };

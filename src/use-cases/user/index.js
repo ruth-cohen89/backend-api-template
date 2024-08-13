@@ -4,7 +4,7 @@ const userDB = require("../../data-access/sql/user-db");
 const createUser = require("./create-user")(userDB);
 const getUserById = require("./get-user-by-id")(userDB);
 const updateUser = require("./update-user")(userDB);
-const deleteUser = require("./delete-user")(userDB);
+const removeUser = require("./remove-user")(userDB);
 const getAllUsers = require("./get-all-users")(userDB);
 
 // Export all user use cases

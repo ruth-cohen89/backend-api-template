@@ -1,4 +1,4 @@
-const deleteProduct = async (productDB, productId) => {
+const removeProduct = async (productDB, productId) => {
   // Add business logic here (e.g., checking if productId is valid)
   await productDB.deleteProduct(productId);
 };

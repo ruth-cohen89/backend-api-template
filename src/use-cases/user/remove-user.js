@@ -1,5 +1,5 @@
 // use-cases/user/delete-user.js
-const deleteUser = async (userRepository, userId) => {
+const removeUser = async (userRepository, userId) => {
   if (!userId) {
     throw new Error("User ID is required.");
   }
