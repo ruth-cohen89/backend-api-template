@@ -1,16 +1,23 @@
+// routes/index.js
+const express = require("express");
 const userRoutes = require("./user-routes");
 const productRoutes = require("./product-routes");
-const { userController, productController } = require("../controllers");
-const express = require("express");
 
 const router = express.Router();
 
+// Welcome route
 router.get("/", (req, res) => {
-  res.json("Welcome to the API :)");
-  // Return JSON of possible routes (api/user, api/product...)
+  res.json({
+    message: "Welcome to the API :)",
+    routes: {
+      users: "/api/users",
+      products: "/api/products",
+    },
+  });
 });
 
-router.use("/users", userRoutes(userController));
-router.use("/products", productRoutes(productController));
+// Use the user and product routes
+router.use("/api", userRoutes);
+router.use("/api", productRoutes);
 
 module.exports = router;

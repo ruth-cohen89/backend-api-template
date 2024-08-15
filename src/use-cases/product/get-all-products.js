@@ -1,8 +1,8 @@
-const productDB = require("../../data-access/sql/product-db");
+const { productDb } = require("../../data-access");
 
 const getAllProducts = async () => {
   // Fetch all products from the database
-  const products = await productDB.getAllProducts();
+  const products = await productDb.getAllProducts();
   return products;
 };
 

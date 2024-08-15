@@ -1,9 +1,16 @@
 class User {
-  constructor(username, email, password) {
-    this.username = username;
+  constructor(
+    name,
+    email,
+    password,
+    createdAt = new Date(),
+    updatedAt = new Date()
+  ) {
+    this.name = name;
     this.email = email;
     this.password = password;
-    this.createdAt = new Date();
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 }
 

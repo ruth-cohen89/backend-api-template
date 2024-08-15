@@ -1,8 +1,6 @@
-// data-access/mongo/product-db/product-db.js
 const ProductModel = require("../../db/mongo/models/product"); // Import MongoDB model
-const Product = require("../../../domain/entities/product"); // Import domain entity
+const Product = require("../../domain/entities/product"); // Import domain entity
 
-// Product Database Access
 const productDb = {
   async create(productData) {
     const product = new Product(

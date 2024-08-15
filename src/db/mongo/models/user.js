@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// TODO: do these functions violate clean architecture?
 // Middleware to update the updatedAt field before saving
 userSchema.pre("save", function (next) {
   this.updatedAt = Date.now();
@@ -34,4 +35,8 @@ userSchema.pre("save", function (next) {
 });
 
 // Export the User model
-module.exports = mongoose.model("User", userSchema);
+//module.exports = mongoose.model("UserModel", userSchema);
+
+const UserModel = mongoose.model("User", userSchema);
+
+module.exports = UserModel;

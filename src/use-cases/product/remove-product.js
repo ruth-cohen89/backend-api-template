@@ -1,8 +1,8 @@
-const productDB = require("../../data-access/sql/product-db");
+const { productDb } = require("../../data-access");
 
 const removeProduct = async (productId) => {
   // Add business logic here (e.g., checking if productId is valid)
-  await productDB.deleteProduct(productId);
+  await productDb.deleteProduct(productId);
 };
 
 module.exports = removeProduct;

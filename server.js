@@ -11,10 +11,10 @@ const dbType = process.env.DB_TYPE || "mongo"; // Default to MongoDB
 // TODO: add catch async errors by a custom catch async file
 const connectDB = async () => {
   if (dbType === "mongo") {
-    const connectMongoDB = require("./src/db/mongoConnection");
+    const connectMongoDB = require("./src/db/mongo/connection");
     await connectMongoDB();
   } else if (dbType === "sql") {
-    const connectSQL = require("./src/db/sqlConnection");
+    const connectSQL = require("./src/db/sql/connection");
     await connectSQL();
   } else {
     throw new Error("Unsupported database type");

@@ -1,6 +1,5 @@
-// data-access/mongo/user-db/user-db.js
 const UserModel = require("../../db/mongo/models/user"); // Import MongoDB model
-const User = require("../../../domain/entities/user"); // Import domain entity
+const User = require("../../domain/entities/user"); // Import domain entity
 
 // User Database Access
 const userDb = {

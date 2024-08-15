@@ -1,8 +1,8 @@
-const productDB = require("../../data-access/sql/product-db");
+const { productDb } = require("../../data-access");
 
 const createProduct = async (productData) => {
   // Add business logic here (e.g., validation)
-  const productId = await productDB.createProduct(productData);
+  const productId = await productDb.createProduct(productData);
   return productId;
 };
 

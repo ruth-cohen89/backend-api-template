@@ -1,6 +1,3 @@
-const userDB = require("../../data-access/sql/user-db");
-
-// Import user use cases
 const createUser = require("./create-user");
 const getUserById = require("./get-user-by-id");
 const updateUser = require("./update-user");

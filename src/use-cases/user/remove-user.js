@@ -1,4 +1,4 @@
-const userDB = require("../../data-access/sql/user-db");
+const { userDb } = require("../../data-access");
 
 const removeUser = async (userId) => {
   if (!userId) {
