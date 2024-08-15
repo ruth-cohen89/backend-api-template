@@ -17,13 +17,6 @@ app.use(
   })
 );
 
-// app.use((req, res, next) => {
-//   console.info(
-//     `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`
-//   );
-//   next();
-// });
-
 // Parse the JSON-encoded data from the request body and makes it available on req.body
 // Reject requests with a JSON body larger than 15 megabytes to prevent (DoS) attacks or server overload
 app.use(bodyParser.json({ limit: "15mb" }));
