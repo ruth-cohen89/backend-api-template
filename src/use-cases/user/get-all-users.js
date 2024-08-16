@@ -1,11 +1,8 @@
 const { userDb } = require("../../data-access");
 
-const getAllUsers = () => {
-  return async () => {
-    // Fetch all users from the database
-    const users = await userDb.getAllUsers();
-    return users;
-  };
+const getAllUsers = async () => {
+  const users = await userDb.getAll();
+  return users;
 };
 
 module.exports = getAllUsers;

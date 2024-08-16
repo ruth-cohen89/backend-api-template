@@ -4,9 +4,10 @@ const User = require("../../domain/entities/user"); // Import domain entity
 // User Database Access
 const userDb = {
   async create(userData) {
-    const user = new User(userData.username, userData.email, userData.password);
+    const user = new User(userData.name, userData.email, userData.password);
+
     const userDocument = new UserModel({
-      username: user.username,
+      name: user.name,
       email: user.email,
       password: user.password, // Ensure to hash the password before saving
       createdAt: user.createdAt,
@@ -27,6 +28,7 @@ const userDb = {
   },
 
   async getAll() {
+    console.log("get");
     return await UserModel.find();
   },
 };

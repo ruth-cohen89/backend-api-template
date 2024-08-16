@@ -6,7 +6,7 @@ const updateUser = async (userId, userData) => {
   if (!userId) {
     throw new Error("User ID is required.");
   }
-  const updated = await userDb.updateUser(userId, userData);
+  const updated = await userDb.update(userId, userData);
   if (!updated) {
     throw new Error("User not found or not updated.");
   }

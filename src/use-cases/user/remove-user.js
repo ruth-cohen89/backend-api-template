@@ -4,7 +4,7 @@ const removeUser = async (userId) => {
   if (!userId) {
     throw new Error("User ID is required.");
   }
-  const deleted = await userDB.deleteUser(userId);
+  const deleted = await userDb.delete(userId);
   if (!deleted) {
     throw new Error("User not found or not deleted.");
   }
