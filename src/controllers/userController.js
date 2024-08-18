@@ -14,10 +14,10 @@ const userController = {
     try {
       const userData = req.body;
 
-      if (!userData.name || !userData.email || !userData.password) {
+      if (!userData.username || !userData.email || !userData.password) {
         return res
           .status(400)
-          .json({ error: "Name, password and email are required." });
+          .json({ error: "username, password and email are required." });
       }
 
       const newUser = await createUser(userData);

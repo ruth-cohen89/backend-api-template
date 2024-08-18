@@ -4,10 +4,10 @@ class UserSQLDB {
   }
 
   async createUser(user) {
-    const { name, email } = user;
+    const { username, email } = user;
     const [result] = await this.connection.execute(
       "INSERT INTO users (name, email) VALUES (?, ?)",
-      [name, email]
+      [username, email]
     );
     return result.insertId;
   }
@@ -21,10 +21,10 @@ class UserSQLDB {
   }
 
   async updateUser(id, user) {
-    const { name, email } = user;
+    const { username, email } = user;
     const [result] = await this.connection.execute(
       "UPDATE users SET name = ?, email = ? WHERE id = ?",
-      [name, email, id]
+      [username, email, id]
     );
     return result.affectedRows > 0;
   }
