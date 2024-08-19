@@ -1,10 +1,17 @@
-class Product {
-  constructor(name, price, description, createdAt = new Date()) {
-    this.name = name;
-    this.price = price;
-    this.description = description;
-    this.createdAt = createdAt;
-  }
-}
-
-module.exports = Product;
+//  buildMakeProduct is a function factory
+// makeProduct is a factory function
+const buildMakeProduct = () => {
+  return function makeProduct({
+    name,
+    price,
+    description,
+    createdAt = new Date(),
+  }) {
+    return Object.freeze({
+      getName: () => name,
+      getPrice: () => price,
+      getDescription: () => description,
+      getCreatedAt: () => createdAt,
+    });
+  };
+};

@@ -1,17 +1,20 @@
-class User {
-  constructor(
+const buildMakeUser = () => {
+  return function makeUser({
     name,
     email,
     password,
     createdAt = new Date(),
-    updatedAt = new Date()
-  ) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-}
+    updatedAt = new Date(),
+  }) {
+    // Validate the input if necessary here, or assume it's handled elsewhere
+    return Object.freeze({
+      getName: () => name,
+      getEmail: () => email,
+      getPassword: () => password,
+      getCreatedAt: () => createdAt,
+      getUpdatedAt: () => updatedAt,
+    });
+  };
+};
 
-module.exports = User;
+module.exports = buildMakeUser;
