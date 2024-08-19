@@ -1,16 +1,34 @@
 const UserModel = require("../../db/mongo/models/user"); // Import MongoDB model
-const User = require("../../domain/entities/user"); // Import domain entity
+const createUser = require("../../domain/entities/user"); // Import user factory function
 
 // User Database Access
 const userDb = {
   async create(userData) {
-    const user = new User(userData.username, userData.email, userData.password);
+    // const user = new User(userData.username, userData.email, userData.password);
 
+    // const userDocument = new UserModel({
+    //   username: user.username,
+    //   email: user.email,
+    //   password: user.password, // Ensure to hash the password before saving
+    //   role: user.role,
+    //   createdAt: user.createdAt,
+    // });
+
+    const user = createUser(
+      userData.username,
+      userData.password, // Ensure to hash the password before saving
+      userData.email,
+      userData.role,
+      userData.createdAt // This should be handled by the validator
+    );
+
+    // Create a MongoDB document from the user entity
     const userDocument = new UserModel({
-      username: user.username,
-      email: user.email,
-      password: user.password, // Ensure to hash the password before saving
-      createdAt: user.createdAt,
+      username: user.getUserName(),
+      email: user.getEmail(),
+      password: user.getPassword(), // Hash the password before saving
+      role: user.getRole(),
+      createdAt: user.getCreatedAt(),
     });
     return await userDocument.save();
   },
@@ -28,7 +46,6 @@ const userDb = {
   },
 
   async getAll() {
-    console.log("get");
     return await UserModel.find();
   },
 };

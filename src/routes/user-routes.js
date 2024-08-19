@@ -1,5 +1,6 @@
 const express = require("express");
-const validate = require("@/middleware/validate");
+const validate = require("../middleware/validate");
+
 const {
   validateCreateUser,
   validateUpdateUser,

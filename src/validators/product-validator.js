@@ -1,6 +1,5 @@
 const Joi = require("joi");
 
-// Validator for creating a product
 const validateCreateProduct = Joi.object({
   body: Joi.object({
     name: Joi.string().required().error(new Error("Product name is required")),
@@ -11,35 +10,33 @@ const validateCreateProduct = Joi.object({
         new Error("Product price is required and must be a positive number")
       ),
     description: Joi.string().optional().allow(""),
-    createdAt: Joi.date()
-      .default(() => new Date(), "current date")
-      .optional(),
-  }),
-  params: Joi.object(),
-  query: Joi.object(),
+    createdAt: Joi.date().default(Date.now).optional(),
+  }).required(),
+  params: Joi.object().optional(),
+  query: Joi.object().optional(),
 });
 
 // Validator for updating a product
 const validateUpdateProduct = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("Product ID is required")),
-  }),
+  }).required(),
   body: Joi.object({
     name: Joi.string().optional(),
     price: Joi.number().positive().optional(),
     description: Joi.string().optional().allow(""),
     createdAt: Joi.date().optional(),
-  }),
-  query: Joi.object(),
+  }).optional(),
+  query: Joi.object().optional(),
 });
 
 // Validator for deleting a product
 const validateDeleteProduct = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("Product ID is required")),
-  }),
-  body: Joi.object(),
-  query: Joi.object(),
+  }).required(),
+  body: Joi.object().optional(),
+  query: Joi.object().optional(),
 });
 
 // Validator for getting a product by ID
@@ -48,9 +45,9 @@ const validateGetProduct = Joi.object({
     id: Joi.string()
       .required()
       .error(new Error("ID is required and must be a valid string.")),
-  }),
-  body: Joi.object(),
-  query: Joi.object(),
+  }).required(),
+  body: Joi.object().optional(),
+  query: Joi.object().optional(),
 });
 
 module.exports = {

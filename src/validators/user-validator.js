@@ -9,35 +9,39 @@ const validateCreateUser = Joi.object({
       .required()
       .error(new Error("Valid email is required")),
     password: Joi.string().required().error(new Error("Password is required")),
+    role: Joi.string().optional(),
     createdAt: Joi.date().default(Date.now),
-    updatedAt: Joi.date().default(Date.now),
-  }),
-  params: Joi.object(), // No params needed for creation
-  query: Joi.object(), // No query parameters for creation
+    //updatedAt: Joi.date().default(Date.now),
+  }).required(),
+  params: Joi.object().optional(),
+  query: Joi.object().optional(),
 });
 
 // Validation for updating a user
 const validateUpdateUser = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("ID is required")),
-  }),
+  }).required(),
   body: Joi.object({
     username: Joi.string().optional(),
     email: Joi.string().email().optional(),
     password: Joi.string().optional(),
+    role: Joi.string().optional(),
     createdAt: Joi.date().optional(),
-    updatedAt: Joi.date().optional(),
-  }).min(1), // Ensure at least one field is present
-  query: Joi.object(), // No query parameters for update
+    //updatedAt: Joi.date().optional(),
+  })
+    .min(1)
+    .optional(),
+  query: Joi.object().optional(),
 });
 
 // Validation for deleting a user
 const validateDeleteUser = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("ID is required")),
-  }),
-  body: Joi.object(), // No body needed for deletion
-  query: Joi.object(), // No query parameters for deletion
+  }).required(),
+  body: Joi.object().optional(),
+  query: Joi.object().optional(),
 });
 
 // Validation for getting a user
@@ -46,9 +50,9 @@ const validateGetUser = Joi.object({
     id: Joi.string()
       .required()
       .error(new Error("ID is required and must be a valid string.")),
-  }),
-  body: Joi.object(), // No body needed for getting a user
-  query: Joi.object(), // Optionally, you can validate query parameters if needed
+  }).required(),
+  body: Joi.object().optional(),
+  query: Joi.object().optional(),
 });
 
 module.exports = {

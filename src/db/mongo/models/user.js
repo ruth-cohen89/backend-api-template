@@ -17,22 +17,25 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  // updatedAt: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
 });
 
 // TODO: do these functions violate clean architecture?
 // Middleware to update the updatedAt field before saving
-userSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+// userSchema.pre("save", function (next) {
+//   this.updatedAt = Date.now();
+//   next();
+// });
 
 // Export the User model
 //module.exports = mongoose.model("UserModel", userSchema);

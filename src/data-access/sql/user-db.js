@@ -1,3 +1,4 @@
+// TODO: לתקן את כל הקובץ ולכתוב פונקציות חדשות
 class UserSQLDB {
   constructor(connection) {
     this.connection = connection;

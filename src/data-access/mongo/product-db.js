@@ -1,19 +1,23 @@
 const ProductModel = require("../../db/mongo/models/product"); // Import MongoDB model
-const Product = require("../../domain/entities/product"); // Import domain entity
+const createProduct = require("../../domain/entities/product"); // Import product factory function
 
 const productDb = {
   async create(productData) {
-    const product = new Product(
+    const product = createProduct(
       productData.name,
       productData.price,
-      productData.description
+      productData.description,
+      productData.createdAt // This should be handled by the validator or default to now
     );
+
+    // Create a MongoDB document from the product entity
     const productDocument = new ProductModel({
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      createdAt: product.createdAt,
+      name: product.getName(),
+      price: product.getPrice(),
+      description: product.getDescription(),
+      createdAt: product.getCreatedAt(),
     });
+
     return await productDocument.save();
   },
 
