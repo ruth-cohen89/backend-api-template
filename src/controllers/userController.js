@@ -13,13 +13,6 @@ const userController = {
   registerUser: async (req, res) => {
     try {
       const userData = req.body;
-
-      if (!userData.username || !userData.email || !userData.password) {
-        return res
-          .status(400)
-          .json({ error: "username, password and email are required." });
-      }
-
       const newUser = await createUser(userData);
       res.status(201).json(newUser);
     } catch (error) {
