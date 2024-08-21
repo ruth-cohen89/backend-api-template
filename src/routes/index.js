@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 });
 
 // Use the user and product routes
-router.use("/api", userRoutes);
-router.use("/api", productRoutes);
+router.use("/api/users", userRoutes);
+router.use("/api/products", productRoutes);
 
 module.exports = router;

@@ -12,24 +12,20 @@ const { productController } = require("../controllers");
 
 const router = express.Router();
 
-router.post(
-  "/products",
-  validate(validateCreateProduct),
-  productController.addProduct
-);
-router.get("/products", productController.listProducts);
+router.post("/", validate(validateCreateProduct), productController.addProduct);
+router.get("/", productController.listProducts);
 router.get(
-  "/products/:id",
+  "/:id",
   validate(validateGetProduct),
   productController.fetchProductById
 );
 router.put(
-  "/products/:id",
+  "/:id",
   validate(validateUpdateProduct),
   productController.modifyProduct
 );
 router.delete(
-  "/products/:id",
+  "/:id",
   validate(validateDeleteProduct),
   productController.deleteProduct
 );

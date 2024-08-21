@@ -12,26 +12,10 @@ const { userController } = require("../controllers");
 const router = express.Router();
 
 // User routes
-router.post(
-  "/users",
-  validate(validateCreateUser),
-  userController.registerUser
-);
-router.get("/users", userController.listUsers);
-router.get(
-  "/users/:id",
-  validate(validateGetUser),
-  userController.fetchUserById
-);
-router.put(
-  "/users/:id",
-  validate(validateUpdateUser),
-  userController.modifyUser
-);
-router.delete(
-  "/users/:id",
-  validate(validateDeleteUser),
-  userController.deleteUser
-);
+router.post("/", validate(validateCreateUser), userController.registerUser);
+router.get("/", userController.listUsers);
+router.get("/:id", validate(validateGetUser), userController.fetchUserById);
+router.put("/:id", validate(validateUpdateUser), userController.modifyUser);
+router.delete("/:id", validate(validateDeleteUser), userController.deleteUser);
 
 module.exports = router;
