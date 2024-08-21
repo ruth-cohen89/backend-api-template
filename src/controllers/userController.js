@@ -1,5 +1,3 @@
-// controllers/userController.js
-
 const {
   createUser,
   getUserById,
@@ -9,7 +7,6 @@ const {
 } = require("../use-cases/user");
 
 const userController = {
-  // Controller function to create a user
   registerUser: async (req, res) => {
     try {
       const userData = req.body;

@@ -1,23 +1,18 @@
 const Joi = require("joi");
+// TODO: Add a strict validation for checking the id type based on db type
 
-// Validation for creating a user
 const validateCreateUser = Joi.object({
   body: Joi.object({
-    username: Joi.string().required().error(new Error("Username is required")),
-    email: Joi.string()
-      .email()
-      .required()
-      .error(new Error("Valid email is required")),
-    password: Joi.string().required().error(new Error("Password is required")),
+    username: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
     role: Joi.string().optional(),
     createdAt: Joi.date().default(Date.now),
-    //updatedAt: Joi.date().default(Date.now),
   }).required(),
   params: Joi.object().optional(),
   query: Joi.object().optional(),
-});
+}).options({ abortEarly: false });
 
-// Validation for updating a user
 const validateUpdateUser = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("ID is required")),
@@ -35,7 +30,6 @@ const validateUpdateUser = Joi.object({
   query: Joi.object().optional(),
 });
 
-// Validation for deleting a user
 const validateDeleteUser = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("ID is required")),
@@ -44,7 +38,6 @@ const validateDeleteUser = Joi.object({
   query: Joi.object().optional(),
 });
 
-// Validation for getting a user
 const validateGetUser = Joi.object({
   params: Joi.object({
     id: Joi.string()

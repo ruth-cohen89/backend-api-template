@@ -1,14 +1,10 @@
 const Joi = require("joi");
+// TODO: Add a strict validation for checking the id type based on db type
 
 const validateCreateProduct = Joi.object({
   body: Joi.object({
-    name: Joi.string().required().error(new Error("Product name is required")),
-    price: Joi.number()
-      .positive()
-      .required()
-      .error(
-        new Error("Product price is required and must be a positive number")
-      ),
+    name: Joi.string().required(),
+    price: Joi.number().positive().required(),
     description: Joi.string().optional().allow(""),
     createdAt: Joi.date().default(Date.now).optional(),
   }).required(),
@@ -16,7 +12,6 @@ const validateCreateProduct = Joi.object({
   query: Joi.object().optional(),
 });
 
-// Validator for updating a product
 const validateUpdateProduct = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("Product ID is required")),
@@ -30,7 +25,6 @@ const validateUpdateProduct = Joi.object({
   query: Joi.object().optional(),
 });
 
-// Validator for deleting a product
 const validateDeleteProduct = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("Product ID is required")),
@@ -39,7 +33,6 @@ const validateDeleteProduct = Joi.object({
   query: Joi.object().optional(),
 });
 
-// Validator for getting a product by ID
 const validateGetProduct = Joi.object({
   params: Joi.object({
     id: Joi.string()
