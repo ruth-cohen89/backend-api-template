@@ -1,3 +1,5 @@
+const catchAsync = require("@/utils/catchAsync");
+
 const {
   createUser,
   getUserById,
