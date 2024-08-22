@@ -4,25 +4,14 @@ const createUser = require("../../domain/entities/user"); // Import user factory
 // User Database Access
 const userDb = {
   async create(userData) {
-    // const user = new User(userData.username, userData.email, userData.password);
-
-    // const userDocument = new UserModel({
-    //   username: user.username,
-    //   email: user.email,
-    //   password: user.password, // Ensure to hash the password before saving
-    //   role: user.role,
-    //   createdAt: user.createdAt,
-    // });
-
     const user = createUser(
       userData.username,
-      userData.password, // Ensure to hash the password before saving
+      userData.password,
       userData.email,
       userData.role,
       userData.createdAt // This should be handled by the validator
     );
 
-    // Create a MongoDB document from the user entity
     const userDocument = new UserModel({
       username: user.getUserName(),
       email: user.getEmail(),
