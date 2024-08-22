@@ -1,6 +1,8 @@
 const express = require("express");
 require("dotenv").config();
 const config = require("config");
+const errorHandler = require("./middleware/errorHandler"); // Import error handler
+
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const routes = require("./routes");
@@ -46,12 +48,14 @@ app.all("*", (req, res, next) => {
   //next(new AppError(`Can't find ${req.originalUrl} on the server 🙄`, 404));
 });
 
-app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({
-    status: "error",
-    message: err.message || "Internal Server Error",
-  });
-});
+app.use(errorHandler);
+
+// app.use((err, req, res, next) => {
+//   res.status(err.status || 500).json({
+//     status: "error",
+//     message: err.message || "Internal Server Error",
+//   });
+// });
 
 //app.use(globalErrorHandler);
 

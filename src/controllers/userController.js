@@ -1,4 +1,5 @@
 const catchAsync = require("@/utils/catchAsync");
+const customError = require("@/utils/customError");
 
 const {
   createUser,
@@ -20,7 +21,7 @@ const userController = {
     const userId = req.params.id;
     const user = await getUserById(userId);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      throw new CustomError("User not found", 404);
     }
     res.status(200).json(user);
   }),
@@ -31,7 +32,7 @@ const userController = {
     const updatedData = req.body;
     const updatedUser = await updateUser(userId, updatedData);
     if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
+      throw new CustomError("User not found", 404);
     }
     res.status(200).json(updatedUser);
   }),
@@ -41,7 +42,7 @@ const userController = {
     const userId = req.params.id;
     const deletedUser = await removeUser(userId);
     if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
+      throw new CustomError("User not found", 404); // Throw CustomError
     }
     res.status(204).send(); // No content to send back
   }),
