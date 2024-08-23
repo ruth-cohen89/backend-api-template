@@ -1,12 +1,13 @@
 const { productDb } = require("../../data-access");
+const CustomError = require("@/utils/customError");
 
 const updateProduct = async (productId, productData) => {
   if (!productId) {
-    throw new Error("User ID is required.");
+    throw new CustomError("Product ID is required", 400);
   }
   const updated = await productDb.update(productId, productData);
   if (!updated) {
-    throw new Error("Product not found or not updated.");
+    throw new CustomError("Product not found", 404);
   }
   return updated;
 };

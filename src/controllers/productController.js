@@ -1,5 +1,4 @@
 const catchAsync = require("@/utils/catchAsync");
-const customError = require("@/utils/customError");
 
 const {
   createProduct,
@@ -19,9 +18,6 @@ const productController = {
   fetchProductById: catchAsync(async (req, res) => {
     const productId = req.params.id;
     const product = await getProductById(productId);
-    if (!product) {
-      throw new customError("Product not found", 404);
-    }
     res.status(200).json(product);
   }),
 
@@ -29,18 +25,12 @@ const productController = {
     const productId = req.params.id;
     const updatedData = req.body;
     const updatedProduct = await updateProduct(productId, updatedData);
-    if (!updatedProduct) {
-      throw new CustomError("Product not found", 404);
-    }
     res.status(200).json(updatedProduct);
   }),
 
   deleteProduct: catchAsync(async (req, res) => {
     const productId = req.params.id;
-    const deletedProduct = await removeProduct(productId);
-    if (!deletedProduct) {
-      throw new CustomError("Product not found", 404);
-    }
+    await removeProduct(productId);
     res.status(204).send();
   }),
 
