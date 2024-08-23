@@ -1,14 +1,13 @@
-// use-cases/user/update-user.js
-
 const { userDb } = require("../../data-access");
+const CustomError = require("@/utils/customError");
 
 const updateUser = async (userId, userData) => {
   if (!userId) {
-    throw new Error("User ID is required.");
+    throw new CustomError("User ID is required.", 400);
   }
   const updated = await userDb.update(userId, userData);
   if (!updated) {
-    throw new Error("User not found or not updated.");
+    throw new CustomError("User not found.", 404);
   }
   return updated;
 };

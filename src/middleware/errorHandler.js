@@ -4,12 +4,23 @@ const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
   return new CustomError(message, 400);
 };
-
+const formatDuplicateKeyError = (err) => {
+  if (err.code === 11000 && err.keyValue) {
+    const field = Object.keys(err.keyValue)[0];
+    const value = err.keyValue[field];
+    return `Duplicate value for ${field}: ${value}. Please use a unique value.`;
+  }
+  return "A duplicate key error occurred.";
+};
 const errorHandler = (err, req, res, next) => {
   if (err.name === "CastError") {
     err = handleCastErrorDB(err);
   }
-
+  // Handle MongoDB errors (e.g., duplicate key errors)
+  if (err.code === 11000) {
+    const message = formatDuplicateKeyError(err);
+    return res.status(400).json({ message });
+  }
   if (err instanceof CustomError) {
     return res.status(err.statusCode).json({ message: err.message });
   }

@@ -1,12 +1,13 @@
 const { userDb } = require("../../data-access");
+const CustomError = require("@/utils/customError");
 
 const removeUser = async (userId) => {
   if (!userId) {
-    throw new Error("User ID is required.");
+    throw new CustomError("User ID is required.", 400);
   }
   const deleted = await userDb.delete(userId);
   if (!deleted) {
-    throw new Error("User not found or not deleted.");
+    throw new CustomError("User not found or not deleted.", 404);
   }
   return deleted;
 };
