@@ -1,5 +1,5 @@
 const express = require("express");
-const validate = require("../middleware/validate");
+const validate = require("../../middleware/validate");
 
 const {
   validateCreateUser,
@@ -7,7 +7,7 @@ const {
   validateDeleteUser,
   validateGetUser,
 } = require("@/validators");
-const { userController } = require("../controllers");
+const { userController } = require("../../controllers");
 
 const router = express.Router();
 

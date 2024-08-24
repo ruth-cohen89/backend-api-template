@@ -1,10 +1,11 @@
 const express = require("express");
 require("dotenv").config();
 const config = require("config");
-const errorHandler = require("./middleware/errorHandler");
+const errorHandler = require("../middleware/errorHandler");
+const routes = require("./routes");
+
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const routes = require("./routes");
 const helmet = require("helmet");
 const xssClean = require("xss-clean");
 const rateLimit = require("express-rate-limit");

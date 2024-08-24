@@ -8,7 +8,7 @@ const {
   validateGetProduct,
 } = require("@/validators");
 
-const { productController } = require("../controllers");
+const { productController } = require("../../controllers");
 
 const router = express.Router();
 
