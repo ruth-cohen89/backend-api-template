@@ -8,7 +8,7 @@ The backend-api-template is a robust template for the quick development of backe
 
 - **Clean Architecture:** Implements the 4-layer architecture principles introduced by Robert C. Martin (Bob Martin).
 
-<p align="center">
+<p align="left">
   <img width="568" height="401" src="https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg" />
 </p>
 
