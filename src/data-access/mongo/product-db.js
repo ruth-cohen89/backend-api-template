@@ -1,5 +1,5 @@
-const ProductModel = require("../../db/mongo/models/product"); // Import MongoDB model
-const createProduct = require("../../domain/entities/product"); // Import product factory function
+const ProductModel = require("../../db/mongo/models/product");
+const createProduct = require("../../domain/entities/product");
 
 const productDb = {
   async create(productData) {
@@ -7,10 +7,9 @@ const productDb = {
       productData.name,
       productData.price,
       productData.description,
-      productData.createdAt // This should be handled by the validator or default to now
+      productData.createdAt
     );
 
-    // Create a MongoDB document from the product entity
     const productDocument = new ProductModel({
       name: product.getName(),
       price: product.getPrice(),

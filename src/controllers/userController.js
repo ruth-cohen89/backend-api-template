@@ -16,7 +16,6 @@ const userController = {
     res.status(201).json(newUser);
   }),
 
-  // Controller function to get a user by ID
   fetchUserById: catchAsync(async (req, res) => {
     const userId = req.params.id;
     const user = await getUserById(userId);
@@ -30,7 +29,6 @@ const userController = {
     res.status(200).json(updatedUser);
   }),
 
-  // Controller function to delete a user
   deleteUser: catchAsync(async (req, res) => {
     const userId = req.params.id;
     await removeUser(userId);

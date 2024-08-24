@@ -12,7 +12,17 @@ const formatDuplicateKeyError = (err) => {
   }
   return "A duplicate key error occurred.";
 };
+
+// Function to handle JSON syntax errors
+const handleJsonSyntaxError = (res) => {
+  return res.status(400).json({ message: "Bad JSON format" });
+};
+
 const errorHandler = (err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return handleJsonSyntaxError(res);
+  }
+
   if (err.name === "CastError") {
     err = handleCastErrorDB(err);
   }
