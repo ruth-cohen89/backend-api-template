@@ -1,5 +1,4 @@
 const Joi = require("joi");
-// TODO: Add a strict validation for checking the id type based on db type
 
 const validateCreateUser = Joi.object({
   body: Joi.object({
@@ -23,7 +22,6 @@ const validateUpdateUser = Joi.object({
     password: Joi.string().optional(),
     role: Joi.string().optional(),
     createdAt: Joi.date().optional(),
-    //updatedAt: Joi.date().optional(),
   })
     .min(1)
     .optional(),

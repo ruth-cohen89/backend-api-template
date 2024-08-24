@@ -26,11 +26,13 @@ const errorHandler = (err, req, res, next) => {
   if (err.name === "CastError") {
     err = handleCastErrorDB(err);
   }
+
   // Handle MongoDB errors (e.g., duplicate key errors)
   if (err.code === 11000) {
     const message = formatDuplicateKeyError(err);
     return res.status(400).json({ message });
   }
+
   if (err instanceof CustomError) {
     return res.status(err.statusCode).json({ message: err.message });
   }

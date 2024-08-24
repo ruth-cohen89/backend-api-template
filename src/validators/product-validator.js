@@ -1,5 +1,4 @@
 const Joi = require("joi");
-// TODO: Add a strict validation for checking the id type based on db type
 
 const validateCreateProduct = Joi.object({
   body: Joi.object({

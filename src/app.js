@@ -1,8 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const config = require("config");
-const errorHandler = require("./middleware/errorHandler"); // Import error handler
-
+const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const routes = require("./routes");
@@ -10,11 +9,7 @@ const helmet = require("helmet");
 const xssClean = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 
-//const AppError = require("./src/utils/appError");
-//const globalErrorHandler = require("./src/middlewares/errorHandlerMiddleware.js");
-
 const app = express();
-
 app.use(helmet());
 app.use(xssClean());
 
@@ -45,18 +40,8 @@ app.all("*", (req, res, next) => {
   const error = new Error(`Can't find ${req.originalUrl} on the server 🙄`);
   error.status = 404;
   next(error);
-  //next(new AppError(`Can't find ${req.originalUrl} on the server 🙄`, 404));
 });
 
 app.use(errorHandler);
-
-// app.use((err, req, res, next) => {
-//   res.status(err.status || 500).json({
-//     status: "error",
-//     message: err.message || "Internal Server Error",
-//   });
-// });
-
-//app.use(globalErrorHandler);
 
 module.exports = app;

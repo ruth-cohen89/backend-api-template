@@ -1,7 +1,6 @@
-const UserModel = require("../../db/mongo/models/user"); // Import MongoDB model
-const createUser = require("../../domain/entities/user"); // Import user factory function
+const UserModel = require("../../db/mongo/models/user");
+const createUser = require("../../domain/entities/user");
 
-// User Database Access
 const userDb = {
   async create(userData) {
     const user = createUser(
@@ -9,13 +8,13 @@ const userDb = {
       userData.password,
       userData.email,
       userData.role,
-      userData.createdAt // This should be handled by the validator
+      userData.createdAt
     );
 
     const userDocument = new UserModel({
       username: user.getUserName(),
       email: user.getEmail(),
-      password: user.getPassword(), // Hash the password before saving
+      password: user.getPassword(),
       role: user.getRole(),
       createdAt: user.getCreatedAt(),
     });

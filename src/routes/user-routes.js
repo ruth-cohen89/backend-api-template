@@ -11,7 +11,6 @@ const { userController } = require("../controllers");
 
 const router = express.Router();
 
-// User routes
 router.post("/", validate(validateCreateUser), userController.registerUser);
 router.get("/", userController.listUsers);
 router.get("/:id", validate(validateGetUser), userController.fetchUserById);

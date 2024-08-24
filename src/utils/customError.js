@@ -2,7 +2,7 @@ class CustomError extends Error {
   constructor(message, statusCode) {
     super(message);
     this.statusCode = statusCode;
-    this.isOperational = true; // Indicates that the error is a known operational error
+    this.isOperational = true;
     Error.captureStackTrace(this, this.constructor);
   }
 }

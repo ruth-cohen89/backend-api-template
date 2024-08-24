@@ -1,15 +1,15 @@
 const dbType = process.env.DB_TYPE || "mongo";
 const loadMongoDb = () => {
   return {
-    userDb: require("./mongo/user-db"), // MongoDB User DB
-    productDb: require("./mongo/product-db"), // MongoDB Product DB
+    userDb: require("./mongo/user-db"),
+    productDb: require("./mongo/product-db"),
   };
 };
 
 const loadSqlDb = () => {
   return {
-    userDb: require("./sql/user-db"), // SQL User DB
-    productDb: require("./sql/product-db"), // SQL Product DB
+    userDb: require("./sql/user-db"),
+    productDb: require("./sql/product-db"),
   };
 };
 
