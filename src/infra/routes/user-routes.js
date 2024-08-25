@@ -7,10 +7,17 @@ const {
   validateDeleteUser,
   validateGetUser,
 } = require("@/validators");
-const { userController } = require("../../controllers");
+const { userController, authController } = require("../../controllers");
 
 const router = express.Router();
 
+router.post(
+  "/sign-up/",
+  validate(validateCreateUser),
+  authController.signUpUser
+);
+
+// TODO: Allow register only for admin
 router.post("/", validate(validateCreateUser), userController.registerUser);
 router.get("/", userController.listUsers);
 router.get("/:id", validate(validateGetUser), userController.fetchUserById);
