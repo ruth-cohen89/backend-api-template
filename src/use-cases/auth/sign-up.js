@@ -1,20 +1,8 @@
 const { userDb } = require("../../data-access");
 const { hashPassword } = require("@/utils/passwordUtils");
-const { sendConfirmationEmail } = require("@/utils/emailUtils");
+const { sendVerificationEmail } = require("@/utils/emailUtils");
+const { generateVerificationToken } = require("@/utils/tokenUtils");
 const crypto = require("crypto");
-
-// TODO: move these functions
-const createEmailConfirmToken = () => {
-  const confirmToken = crypto.randomBytes(32).toString("hex");
-  this.confirmEmailToken = crypto
-    .createHash("sha256")
-    .update(confirmToken)
-    .digest("hex");
-
-  this.confirmEmailExpires = Date.now() + 1000 * 60 * 60 * 24 * 3;
-  console.log("created", confirmToken);
-  return confirmToken;
-};
 
 const signUp = async (userData) => {
   const { password, ...otherUserInfo } = userData;
@@ -22,12 +10,17 @@ const signUp = async (userData) => {
   const newUser = { ...otherUserInfo, password: hasedPassword };
 
   const savedUser = await userDb.create(newUser);
-  const confirmToken = createEmailConfirmToken();
+  const {
+    token: verifyToken,
+    hashedToken,
+    expiration,
+  } = generateVerificationToken();
 
-  await sendConfirmationEmail(savedUser, confirmToken);
+  console.log(verifyToken, hashedToken, expiration);
+  // TODO: save hashedToken, expiration in UserDb
+
+  await sendVerificationEmail(savedUser, verifyToken);
   return savedUser;
 };
 
 module.exports = signUp;
-
-// await user.save({ validateBeforeSave: false });

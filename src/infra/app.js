@@ -11,6 +11,15 @@ const xssClean = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 
 const app = express();
+
+app.use((req, res, next) => {
+  if (req.url === "/favicon.ico") {
+    res.status(204).end(); // No Content
+  } else {
+    next();
+  }
+});
+
 app.use(helmet());
 app.use(xssClean());
 
@@ -22,8 +31,7 @@ app.use(
   })
 );
 
-// Parse the JSON-encoded data from the request body and makes it available on req.body
-// Reject requests with a JSON body larger than 15 megabytes to prevent (DoS) attacks or server overload
+// Reject requests with a JSON body larger than 15 megabytes to prevent (DoS) attacks/server overload
 app.use(bodyParser.json({ limit: "15mb" }));
 app.use(bodyParser.urlencoded({ limit: "15mb", extended: true }));
 

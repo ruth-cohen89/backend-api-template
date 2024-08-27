@@ -39,13 +39,15 @@ class Email {
   }
 }
 
-async function sendConfirmationEmail(user, confirmToken) {
+async function sendVerificationEmail(user, confirmToken) {
   try {
-    const port = config.get("port");
-    const host = config.get("host");
-    const protocol = config.get("protocol");
-    const confirmURL = `${protocol}://${host}/emailConfirm/${confirmToken}`;
-    const emailMessage = `Welcome to Backend-API-Template! To confirm your account, please submit a POST request to: ${confirmURL}.`;
+    const origin = config.get("origin");
+
+    // prod
+    // const verificationLink = `http://yourdomain.com/verify-email?token=${token}`;
+
+    const confirmURL = `${origin}/api/users/verify-email/${confirmToken}`;
+    const emailMessage = `Welcome to Backend-API-Template! To confirm your account, please click here: ${confirmURL}.`;
 
     const email = new Email(user, emailMessage);
     await email._sendMail("Email Confirmation");
@@ -66,7 +68,7 @@ async function sendPasswordReset(user, resetToken) {
 }
 
 module.exports = {
-  sendConfirmationEmail,
+  sendVerificationEmail,
   sendPasswordReset,
 };
 

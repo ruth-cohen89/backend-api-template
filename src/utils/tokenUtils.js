@@ -1,39 +1,34 @@
 const crypto = require("crypto");
 
-emailConfirm = catchAsync(async (req, res, next) => {
-  const hashedToken = crypto
-    .createHash("sha256")
-    .update(req.params.token)
-    .digest("hex");
-  const user = await User.findOne({
-    confirmEmailToken: hashedToken,
-    confirmEmailExpires: { $gt: Date.now() },
-  });
-  if (!user) {
-    return next(new AppError("Token is invalid or has expired", 400));
-  }
+const generateVerificationToken = () => {
+  const token = crypto.randomBytes(32).toString("hex");
+  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
-  user.emailConfirmed = true;
-  user.confirmEmailToken = undefined;
-  user.confirmEmailExpires = undefined;
-  await user.save({ validateBeforeSave: false });
-  createSendToken(user, 200, req, res);
-});
-
-// TODO: move these functions
-const createEmailConfirmToken = () => {
-  const confirmToken = crypto.randomBytes(32).toString("hex");
-  this.confirmEmailToken = crypto
-    .createHash("sha256")
-    .update(confirmToken)
-    .digest("hex");
-
-  this.confirmEmailExpires = Date.now() + 1000 * 60 * 60 * 24 * 3;
-  console.log("created", confirmToken);
-  return confirmToken;
+  const expiration = Date.now() + 3600000; // 1 hour from now
+  return { token, hashedToken, expiration };
 };
 
-// userSchema.methods.createPasswordResetToken = function () {
+// Validate the confirm email token
+// TODO
+// emailConfirm = catchAsync(async (req, next) => {
+//   const hashedToken = crypto
+//     .createHash("sha256")
+//     .update(req.params.token)
+//     .digest("hex");
+//   const user = await User.findOne({
+//     confirmEmailToken: hashedToken,
+//     confirmEmailExpires: { $gt: Date.now() },
+//   });
+//   if (!user) {
+//     return next(new AppError("Token is invalid or has expired", 400));
+//   }
+
+//   user.emailConfirmed = true;
+//   await user.save({ validateBeforeSave: false });
+// });
+
+// TODO:
+// createPasswordResetToken = function () {
 //   const resetToken = crypto.randomBytes(32).toString('hex');
 //   this.passwordResetToken = crypto
 //     .createHash('sha256')
@@ -42,4 +37,8 @@ const createEmailConfirmToken = () => {
 //   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 //   return resetToken;
 // };
-module.exports = { emailConfirm, createEmailConfirmToken };
+
+// const generateHashToken = (token) =>
+//   crypto.createHash('sha256').update(token).digest('hex');
+
+module.exports = { generateVerificationToken };

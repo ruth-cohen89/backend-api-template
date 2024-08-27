@@ -17,9 +17,13 @@ router.post(
   authController.signUpUser
 );
 
-// TODO: Allow register only for admin
+// TODO: Restrict this request only to admin
 router.post("/", validate(validateCreateUser), userController.registerUser);
 router.get("/", userController.listUsers);
+
+// TODO: Create verification and handling of this endpoint.
+router.get("/verify-email/:token", authController.verifyEmail);
+
 router.get("/:id", validate(validateGetUser), userController.fetchUserById);
 router.put("/:id", validate(validateUpdateUser), userController.modifyUser);
 router.delete("/:id", validate(validateDeleteUser), userController.deleteUser);
