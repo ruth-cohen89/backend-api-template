@@ -8,16 +8,21 @@ const userDb = {
       userData.password,
       userData.email,
       userData.role,
-      userData.createdAt
+      userData.createdAt,
+      userData.emailVerified,
+      userData.verificationToken,
+      userData.verificationTokenExpires
     );
 
     const userDocument = new UserModel({
       username: user.getUserName(),
-      email: user.getEmail(),
       password: user.getPassword(),
+      email: user.getEmail(),
       role: user.getRole(),
-      createdAt: user.getCreatedAt(),
+      verificationToken: user.getVerificationToken(),
+      verificationTokenExpires: user.getVerificationTokenExpires(),
     });
+
     return await userDocument.save();
   },
 
