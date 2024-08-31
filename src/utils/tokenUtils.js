@@ -1,8 +1,12 @@
 const crypto = require("crypto");
 
+const hashToken = (token) => {
+  return crypto.createHash("sha256").update(token).digest("hex");
+};
+
 const generateVerificationToken = () => {
   const token = crypto.randomBytes(32).toString("hex");
-  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+  const hashedToken = hashToken(token);
 
   const expiration = Date.now() + 3600000; // 1 hour from now
   return { token, hashedToken, expiration };
@@ -41,4 +45,4 @@ const generateVerificationToken = () => {
 // const generateHashToken = (token) =>
 //   crypto.createHash('sha256').update(token).digest('hex');
 
-module.exports = { generateVerificationToken };
+module.exports = { generateVerificationToken, hashToken };

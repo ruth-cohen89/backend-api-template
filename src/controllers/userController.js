@@ -1,5 +1,4 @@
 const catchAsync = require("@/utils/catchAsync");
-const customError = require("@/utils/customError");
 
 const {
   createUser,

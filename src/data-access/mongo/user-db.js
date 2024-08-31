@@ -30,6 +30,10 @@ const userDb = {
     return await UserModel.findById(userId);
   },
 
+  async findOne(data) {
+    return await UserModel.findOne(data);
+  },
+
   async update(userId, userData) {
     return await UserModel.findByIdAndUpdate(userId, userData, { new: true });
   },
