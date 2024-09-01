@@ -21,8 +21,6 @@ const signUp = async (userData) => {
     verificationToken: hashedToken,
     verificationTokenExpires: expiration,
   };
-  console.log(newUser);
-  console.log(verifyToken, hashedToken, expiration);
 
   const savedUser = await userDb.create(newUser);
   await sendVerificationEmail(savedUser, verifyToken);

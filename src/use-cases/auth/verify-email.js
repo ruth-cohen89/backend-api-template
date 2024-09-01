@@ -1,8 +1,8 @@
 const { userDb } = require("../../data-access");
 const { hashToken } = require("@/utils/tokenUtils");
-const customError = require("@/utils/customError");
+const CustomError = require("@/utils/customError");
 
-const verifyUserEmail = async (token) => {
+const verifyEmail = async (token) => {
   const hashedToken = hashToken(token);
 
   const user = await userDb.findOne({
@@ -10,7 +10,7 @@ const verifyUserEmail = async (token) => {
     verificationTokenExpires: { $gt: Date.now() },
   });
   if (!user) {
-    throw new customError("Token is invalid or has expired", 400);
+    throw new CustomError("Token is invalid or has expired", 400);
   }
 
   const updateFields = {
@@ -24,4 +24,4 @@ const verifyUserEmail = async (token) => {
   return updated;
 };
 
-module.exports = verifyUserEmail;
+module.exports = verifyEmail;

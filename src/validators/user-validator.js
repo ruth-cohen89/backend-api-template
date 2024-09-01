@@ -12,6 +12,15 @@ const validateCreateUser = Joi.object({
   query: Joi.object().optional(),
 }).options({ abortEarly: false });
 
+const validateLoginUser = Joi.object({
+  body: Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+  }).required(),
+  params: Joi.object().optional(),
+  query: Joi.object().optional(),
+}).options({ abortEarly: false });
+
 const validateUpdateUser = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("ID is required")),
@@ -51,4 +60,5 @@ module.exports = {
   validateUpdateUser,
   validateDeleteUser,
   validateGetUser,
+  validateLoginUser,
 };

@@ -1,6 +1,6 @@
 const catchAsync = require("@/utils/catchAsync");
 
-const { signUp, login, verifyUserEmail } = require("../use-cases/auth");
+const { signUp, login, verifyEmail } = require("../use-cases/auth");
 
 const authController = {
   signUpUser: catchAsync(async (req, res) => {
@@ -9,16 +9,17 @@ const authController = {
     res.status(201).json(newUser);
   }),
 
-  verifyEmail: catchAsync(async (req, res) => {
+  verifyUserEmail: catchAsync(async (req, res) => {
     const verifyToken = req.params.token;
-    const updatedUser = await verifyUserEmail(verifyToken);
+    const updatedUser = await verifyEmail(verifyToken);
     res.status(201).json(updatedUser);
   }),
 
   loginUser: catchAsync(async (req, res) => {
-    // const userId = req.params.id;
-    // const user = await getUserById(userId);
-    // res.status(200).json(user);
+    const { username, password } = req.body;
+    await login({ username, password });
+    // TODO: return token
+    res.status(200).json("Login successful");
   }),
 };
 

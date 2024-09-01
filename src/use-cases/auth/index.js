@@ -1,9 +1,9 @@
 const login = require("./login");
 const signUp = require("./sign-up");
-const verifyUserEmail = require("./verify-user-email");
+const verifyEmail = require("./verify-email");
 
 module.exports = {
   login,
   signUp,
-  verifyUserEmail,
+  verifyEmail,
 };

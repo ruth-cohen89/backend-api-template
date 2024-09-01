@@ -6,6 +6,7 @@ const {
   validateUpdateUser,
   validateDeleteUser,
   validateGetUser,
+  validateLoginUser,
 } = require("@/validators");
 const { userController, authController } = require("../../controllers");
 
@@ -16,13 +17,14 @@ router.post(
   validate(validateCreateUser),
   authController.signUpUser
 );
+router.post("/login/", validate(validateLoginUser), authController.loginUser);
 
 // TODO: Restrict this request only to admin
 router.post("/", validate(validateCreateUser), userController.registerUser);
 router.get("/", userController.listUsers);
 
 // TODO: Create verification and handling of this endpoint.
-router.get("/verify-email/:token", authController.verifyEmail);
+router.get("/verify-email/:token", authController.verifyUserEmail);
 
 router.get("/:id", validate(validateGetUser), userController.fetchUserById);
 router.put("/:id", validate(validateUpdateUser), userController.modifyUser);
