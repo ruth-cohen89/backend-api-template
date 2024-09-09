@@ -3,7 +3,7 @@ require("dotenv").config();
 const config = require("config");
 const errorHandler = require("../middleware/errorHandler");
 const routes = require("./routes");
-
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
@@ -34,6 +34,7 @@ app.use(
 // Reject requests with a JSON body larger than 15 megabytes to prevent (DoS) attacks/server overload
 app.use(bodyParser.json({ limit: "15mb" }));
 app.use(bodyParser.urlencoded({ limit: "15mb", extended: true }));
+app.use(cookieParser());
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

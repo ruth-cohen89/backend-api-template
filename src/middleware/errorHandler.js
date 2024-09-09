@@ -27,6 +27,14 @@ const errorHandler = (err, req, res, next) => {
     err = handleCastErrorDB(err);
   }
 
+  if (err.name === "TokenExpiredError") {
+    return res.status(401).json({ message: "Access token expired" });
+  }
+
+  if (err.name === "JsonWebTokenError") {
+    return res.status(401).json({ message: "Invalid access token" });
+  }
+
   // Handle MongoDB errors (e.g., duplicate key errors)
   if (err.code === 11000) {
     const message = formatDuplicateKeyError(err);

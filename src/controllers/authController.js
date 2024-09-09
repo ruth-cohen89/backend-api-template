@@ -17,8 +17,23 @@ const authController = {
 
   loginUser: catchAsync(async (req, res) => {
     const { username, password } = req.body;
-    await login({ username, password });
-    // TODO: return token
+
+    const { accessToken, refreshToken } = await login({ username, password });
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: (process.env.NODE_ENV = "production"),
+      makAge: 15 * 60 * 1000,
+      sameSite: "Strict",
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: (process.env.NODE_ENV = "production"),
+      makAge: 15 * 60 * 1000,
+      sameSite: "Strict",
+    });
+    // Return tokens to the client
+    //return { accessToken, refreshToken };
     res.status(200).json("Login successful");
   }),
 };
