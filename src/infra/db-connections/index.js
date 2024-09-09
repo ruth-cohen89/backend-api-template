@@ -1,5 +1,6 @@
+const mongoose = require("mongoose");
+
 const dbType = process.env.DB_TYPE || "mongo";
-// Import connection functions
 const connectMongoDB = require("./mongoConnection");
 const { connectSQL, closeSQL } = require("./sqlConnection");
 

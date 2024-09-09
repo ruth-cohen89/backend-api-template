@@ -1,5 +1,5 @@
 const { userDb } = require("../../data-access");
-const CustomError = require("@/utils/customError");
+const CustomError = require("../../utils/customError");
 
 const updateUser = async (userId, userData) => {
   if (!userId) {

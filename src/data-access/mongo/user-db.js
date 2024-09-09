@@ -3,7 +3,6 @@ const createUser = require("../../domain/entities/user");
 
 const userDb = {
   async create(userData) {
-    console.log("the", userData.role);
     const user = createUser(
       userData.username,
       userData.password,
@@ -14,12 +13,12 @@ const userDb = {
       userData.verificationToken,
       userData.verificationTokenExpires
     );
-
     const userDocument = new UserModel({
       username: user.getUserName(),
       password: user.getPassword(),
       email: user.getEmail(),
       role: user.getRole(),
+      emailVerified: user.getEmailVerified(),
       verificationToken: user.getVerificationToken(),
       verificationTokenExpires: user.getVerificationTokenExpires(),
     });

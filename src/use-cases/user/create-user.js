@@ -1,10 +1,17 @@
 const { userDb } = require("../../data-access");
+const { hashPassword } = require("../../utils/passwordUtils");
 
-// TODO: Adjust for Admin usage only
 const createUser = async (userData) => {
-  console.log(userData.role);
-  const userId = await userDb.create(userData);
-  return userId;
+  const { password, ...otherUserInfo } = userData;
+  const hashedPassword = await hashPassword(password);
+
+  const newUser = {
+    ...otherUserInfo,
+    password: hashedPassword,
+  };
+
+  const savedUser = await userDb.create(newUser);
+  return savedUser;
 };
 
 module.exports = createUser;

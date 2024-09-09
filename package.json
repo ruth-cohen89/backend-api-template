@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node src/infra/server.js",
     "dev": "nodemon src/infra/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-admin": "node src/infra/scripts/create-admin.js"
   },
   "author": "Ruth Cohen",
   "license": "ISC",
