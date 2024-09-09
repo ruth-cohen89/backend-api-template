@@ -3,6 +3,7 @@ const createUser = require("../../domain/entities/user");
 
 const userDb = {
   async create(userData) {
+    console.log("the", userData.role);
     const user = createUser(
       userData.username,
       userData.password,
