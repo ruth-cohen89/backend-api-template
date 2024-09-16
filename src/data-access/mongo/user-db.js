@@ -1,4 +1,4 @@
-const UserModel = require("../../db/mongo/models/user");
+const UserModel = require("../../db-schemas/mongo/models/user");
 const createUser = require("../../domain/entities/user");
 
 const userDb = {

@@ -1,4 +1,4 @@
-const ProductModel = require("../../db/mongo/models/product");
+const ProductModel = require("../../db-schemas/mongo/models/product");
 const createProduct = require("../../domain/entities/product");
 
 const productDb = {
