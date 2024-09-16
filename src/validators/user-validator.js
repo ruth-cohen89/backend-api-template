@@ -12,6 +12,21 @@ const validateCreateUser = Joi.object({
   query: Joi.object().optional(),
 }).options({ abortEarly: false });
 
+const validateSignupUser = Joi.object({
+  body: Joi.object({
+    username: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+    role: Joi.string()
+      .valid("user")
+      .default("user")
+      .error(new Error("Role must be 'user'")), // Default to 'user' if role is not provided
+    createdAt: Joi.date().default(Date.now),
+  }).required(), // Ensure body is required
+  params: Joi.object().optional(),
+  query: Joi.object().optional(),
+}).options({ abortEarly: false });
+
 const validateLoginUser = Joi.object({
   body: Joi.object({
     username: Joi.string().required(),
@@ -57,8 +72,9 @@ const validateGetUser = Joi.object({
 
 module.exports = {
   validateCreateUser,
+  validateSignupUser,
+  validateLoginUser,
   validateUpdateUser,
   validateDeleteUser,
   validateGetUser,
-  validateLoginUser,
 };

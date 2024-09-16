@@ -2,9 +2,7 @@ const validate = (schema) => (req, res, next) => {
   try {
     const { body, query, params } = req;
     const input = { body, query, params };
-
     const { error } = schema.validate(input, { abortEarly: false });
-
     if (!error) {
       next();
     } else {

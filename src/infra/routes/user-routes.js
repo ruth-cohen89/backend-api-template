@@ -5,10 +5,11 @@ const restrictTo = require("../../middleware/restrictTo");
 
 const {
   validateCreateUser,
+  validateSignupUser,
+  validateLoginUser,
   validateUpdateUser,
   validateDeleteUser,
   validateGetUser,
-  validateLoginUser,
 } = require("@/validators");
 const { userController, authController } = require("../../controllers");
 
@@ -16,7 +17,7 @@ const router = express.Router();
 
 router.post(
   "/sign-up/",
-  validate(validateCreateUser),
+  validate(validateSignupUser),
   authController.signUpUser
 );
 
