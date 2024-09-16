@@ -1,7 +1,8 @@
 const catchAsync = require("@/utils/catchAsync");
 const CustomError = require("@/utils/customError");
 
-const authorizationMiddleware = (...roles) =>
+// Autorization
+const restrictTo = (...roles) =>
   catchAsync(async (req, res, next) => {
     console.log(req.user.role);
     if (!req.user || !roles.includes(req.user.role)) {
@@ -13,4 +14,4 @@ const authorizationMiddleware = (...roles) =>
     next();
   });
 
-module.exports = authorizationMiddleware;
+module.exports = restrictTo;

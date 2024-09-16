@@ -1,7 +1,7 @@
 const express = require("express");
 const validate = require("../../middleware/validate");
 const authMiddleware = require("../../middleware/authMiddleware");
-const authorizationMiddleware = require("../../middleware/authorizationMiddleware");
+const restrictTo = require("../../middleware/restrictTo");
 
 const {
   validateCreateUser,
@@ -25,7 +25,7 @@ router.post(
   "/",
   validate(validateCreateUser),
   authMiddleware,
-  authorizationMiddleware("admin"),
+  restrictTo("admin"),
   userController.registerUser
 );
 
@@ -49,7 +49,7 @@ router.delete(
   "/:id",
   validate(validateDeleteUser),
   authMiddleware,
-  authorizationMiddleware("admin"),
+  restrictTo("admin"),
   userController.deleteUser
 );
 
