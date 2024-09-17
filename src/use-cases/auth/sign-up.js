@@ -16,7 +16,6 @@ const signUp = async (userData) => {
   const newUser = {
     ...otherUserInfo,
     password: hashedPassword,
-    role: "user",
     emailVerified: false,
     verificationToken: hashedToken,
     verificationTokenExpires: expiration,

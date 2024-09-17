@@ -8,6 +8,7 @@ const createUser = async (userData) => {
   const newUser = {
     ...otherUserInfo,
     password: hashedPassword,
+    emailVerified: true,
   };
 
   const savedUser = await userDb.create(newUser);
