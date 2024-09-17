@@ -9,6 +9,7 @@ const {
   validateUpdateUser,
   validateDeleteUser,
   validateGetUser,
+  updateMe,
 } = require("@/validators");
 const { userController, authController } = require("../../controllers");
 
@@ -19,11 +20,15 @@ router.post(
   validate(validateSignupUser),
   authController.signUpUser
 );
+
 router.get("/verify-email/:token", authController.verifyUserEmail);
 router.post("/login/", validate(validateLoginUser), authController.loginUser);
 
+// auth
 router.use(authMiddleware);
+
 router.delete("/delete-me/", userController.deleteMe);
+router.patch("/updateMe", userController.updateMe);
 //router.patch("/update-my-password/", userController.deleteMe);
 
 router.get("/", userController.listUsers);

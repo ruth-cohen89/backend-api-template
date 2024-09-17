@@ -35,6 +35,15 @@ const userController = {
     res.status(204).send();
   }),
 
+  // updateMe: catchAsync(async (req, res) => {
+  //   const userId = req.user.id;
+  //   const {password, email} = req.body;
+  //   if (password)
+  //   // const updatedData = req.body;
+  //   // const updatedUser = await updateUser(userId, updatedData);
+  //   // res.status(200).json(updatedUser);
+  // }),
+
   deleteMe: catchAsync(async (req, res) => {
     const userId = req.user.id;
     await softDeleteUser(userId);

@@ -6,9 +6,8 @@ const updateUser = async (userId, userData) => {
   if (!userId) {
     throw new CustomError("User ID is required.", 400);
   }
-  // hash
+
   const { password, ...otherUserInfo } = userData;
-  console.log(password);
   if (password) {
     const hashedPassword = await hashPassword(password);
     userData = { password: hashedPassword, ...otherUserInfo };
