@@ -38,12 +38,14 @@ router.post(
   ),
   userController.registerUser
 );
+
 router.get(
   "/:id",
   validate(validateGetUser),
   //authMiddleware,
   userController.fetchUserById
 );
+
 router.patch(
   "/:id",
   validate(validateUpdateUser),
