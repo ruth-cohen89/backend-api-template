@@ -19,7 +19,7 @@ router.get(
   validate(validateGetProduct),
   productController.fetchProductById
 );
-router.put(
+router.patch(
   "/:id",
   validate(validateUpdateProduct),
   productController.modifyProduct

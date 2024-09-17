@@ -2,7 +2,6 @@ const express = require("express");
 const validate = require("../../middleware/validate");
 const authMiddleware = require("../../middleware/authMiddleware");
 const restrictTo = require("../../middleware/restrictTo");
-
 const {
   validateCreateUser,
   validateSignupUser,
@@ -25,6 +24,7 @@ router.post("/login/", validate(validateLoginUser), authController.loginUser);
 
 router.use(authMiddleware);
 router.delete("/delete-me/", userController.deleteMe);
+//router.patch("/update-my-password/", userController.deleteMe);
 
 router.get("/", userController.listUsers);
 
@@ -44,7 +44,7 @@ router.get(
   //authMiddleware,
   userController.fetchUserById
 );
-router.put(
+router.patch(
   "/:id",
   validate(validateUpdateUser),
   //authMiddleware,

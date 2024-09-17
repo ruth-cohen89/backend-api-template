@@ -56,8 +56,6 @@ const validateDeleteUser = Joi.object({
   params: Joi.object({
     id: Joi.string().required().error(new Error("ID is required")),
   }).required(),
-  body: Joi.object().optional(),
-  query: Joi.object().optional(),
 });
 
 const validateGetUser = Joi.object({
