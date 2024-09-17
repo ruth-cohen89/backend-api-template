@@ -6,6 +6,7 @@ const {
   updateUser,
   removeUser,
   getAllUsers,
+  softDeleteUser,
 } = require("../use-cases/user");
 
 const userController = {
@@ -31,6 +32,12 @@ const userController = {
   deleteUser: catchAsync(async (req, res) => {
     const userId = req.params.id;
     await removeUser(userId);
+    res.status(204).send();
+  }),
+
+  deleteMe: catchAsync(async (req, res) => {
+    const userId = req.user.id;
+    await softDeleteUser(userId);
     res.status(204).send();
   }),
 

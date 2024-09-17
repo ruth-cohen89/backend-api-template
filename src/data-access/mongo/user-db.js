@@ -8,16 +8,19 @@ const userDb = {
       userData.password,
       userData.email,
       userData.role,
+      userData.active,
       userData.createdAt,
       userData.emailVerified,
       userData.verificationToken,
       userData.verificationTokenExpires
     );
+
     const userDocument = new UserModel({
       username: user.getUserName(),
       password: user.getPassword(),
       email: user.getEmail(),
       role: user.getRole(),
+      active: user.getIsActive(),
       emailVerified: user.getEmailVerified(),
       verificationToken: user.getVerificationToken(),
       verificationTokenExpires: user.getVerificationTokenExpires(),

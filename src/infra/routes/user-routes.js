@@ -22,9 +22,11 @@ router.post(
 );
 router.get("/verify-email/:token", authController.verifyUserEmail);
 router.post("/login/", validate(validateLoginUser), authController.loginUser);
-router.get("/", userController.listUsers);
 
 router.use(authMiddleware);
+router.delete("/delete-me/", userController.deleteMe);
+
+router.get("/", userController.listUsers);
 
 router.post(
   "/",
@@ -55,7 +57,7 @@ router.delete(
   //authMiddleware,
   restrictTo(
     "admin",
-    "Only admins can use this route. Use the soft-delete endpoint instead."
+    "Only admins can use this route. Use the delete-me endpoint instead."
   ),
   userController.deleteUser
 );

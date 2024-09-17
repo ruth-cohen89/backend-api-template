@@ -15,9 +15,12 @@ const login = async (userData) => {
     throw new CustomError("You have not confirmed your email address", 401);
   }
 
-  //  if (!user.isActive) {
-  //     throw new CustomError("User is not active", 401);
-  //   }
+  if (!user.active) {
+    throw new CustomError(
+      "Your account has been deactivated. Please contact support if you need assistance.",
+      401
+    );
+  }
 
   const { accessToken, refreshToken } = generateTokens(user._id);
   return { accessToken, refreshToken };

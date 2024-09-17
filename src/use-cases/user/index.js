@@ -3,6 +3,7 @@ const getUserById = require("./get-user-by-id");
 const updateUser = require("./update-user");
 const removeUser = require("./remove-user");
 const getAllUsers = require("./get-all-users");
+const softDeleteUser = require("./soft-delete-user");
 
 module.exports = {
   createUser,
@@ -10,4 +11,5 @@ module.exports = {
   updateUser,
   removeUser,
   getAllUsers,
+  softDeleteUser,
 };
