@@ -9,7 +9,8 @@ const {
   validateUpdateUser,
   validateDeleteUser,
   validateGetUser,
-  updateMe,
+  validateUpdateMe,
+  validateUpdateMyPassword,
 } = require("@/validators");
 const { userController, authController } = require("../../controllers");
 
@@ -27,8 +28,14 @@ router.post("/login/", validate(validateLoginUser), authController.loginUser);
 // auth
 router.use(authMiddleware);
 
-router.delete("/delete-me/", userController.deleteMe);
-router.patch("/updateMe", userController.updateMe);
+router.delete("/me/", userController.deleteMe);
+router.patch("/me/", validate(validateUpdateMe), userController.updateMe);
+router.patch(
+  "/me/password",
+  validate(validateUpdateMyPassword),
+  authController.updateMyPassword
+);
+
 //router.patch("/update-my-password/", userController.deleteMe);
 
 router.get("/", userController.listUsers);

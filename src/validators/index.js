@@ -5,6 +5,8 @@ const {
   validateGetUser,
   validateLoginUser,
   validateSignupUser,
+  validateUpdateMe,
+  validateUpdateMyPassword,
 } = require("./user-validator");
 
 const {
@@ -21,6 +23,8 @@ module.exports = {
   validateGetUser,
   validateSignupUser,
   validateLoginUser,
+  validateUpdateMe,
+  validateUpdateMyPassword,
   validateCreateProduct,
   validateUpdateProduct,
   validateDeleteProduct,

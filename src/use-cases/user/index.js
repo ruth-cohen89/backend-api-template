@@ -4,6 +4,7 @@ const updateUser = require("./update-user");
 const removeUser = require("./remove-user");
 const getAllUsers = require("./get-all-users");
 const softDeleteUser = require("./soft-delete-user");
+const updateMe = require("./update-me");
 
 module.exports = {
   createUser,
@@ -12,4 +13,5 @@ module.exports = {
   removeUser,
   getAllUsers,
   softDeleteUser,
+  updateMe,
 };
