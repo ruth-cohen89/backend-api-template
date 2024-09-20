@@ -1,17 +1,19 @@
 const createUser = require("./create-user");
-const getUserById = require("./get-user-by-id");
-const updateUser = require("./update-user");
+const fetchUserById = require("./fetch-user-by-id");
+const modifyUser = require("./modify-user");
 const removeUser = require("./remove-user");
-const getAllUsers = require("./get-all-users");
+const fetchAllUsers = require("./fetch-all-users");
 const softDeleteUser = require("./soft-delete-user");
-const updateMe = require("./update-me");
+const modifyMyUser = require("./modify-my-user");
+const fetchMyUser = require("./fetch-my-user");
 
 module.exports = {
   createUser,
-  getUserById,
-  updateUser,
+  fetchUserById,
+  modifyUser,
   removeUser,
-  getAllUsers,
+  fetchAllUsers,
   softDeleteUser,
-  updateMe,
+  modifyMyUser,
+  fetchMyUser,
 };

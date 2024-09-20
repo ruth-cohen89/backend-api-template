@@ -1,11 +1,7 @@
 const { userDb } = require("../../data-access");
 const CustomError = require("../../utils/customError");
 
-const getUserById = async (
-  userId,
-  customMessage = "User not found",
-  statusCode = 404
-) => {
+const fetchUserById = async (userId) => {
   if (!userId) {
     throw new CustomError("User ID is required.", 400);
   }
@@ -13,10 +9,10 @@ const getUserById = async (
   const user = await userDb.getById(userId);
 
   if (!user) {
-    throw new CustomError(customMessage, statusCode);
+    throw new CustomError("User not found.", 404);
   }
 
   return user;
 };
 
-module.exports = getUserById;
+module.exports = fetchUserById;

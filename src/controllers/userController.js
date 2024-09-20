@@ -2,12 +2,13 @@ const catchAsync = require("@/utils/catchAsync");
 
 const {
   createUser,
-  getUserById,
-  updateUser,
+  fetchUserById,
+  modifyUser,
   removeUser,
-  getAllUsers,
+  fetchAllUsers,
   softDeleteUser,
-  updateMe,
+  modifyMyUser,
+  fetchMyUser,
 } = require("../use-cases/user");
 
 const userController = {
@@ -17,21 +18,27 @@ const userController = {
     res.status(201).json(newUser);
   }),
 
-  listUsers: catchAsync(async (req, res) => {
-    const users = await getAllUsers();
+  getAllUsers: catchAsync(async (req, res) => {
+    const users = await fetchAllUsers();
     res.status(200).json(users);
   }),
 
-  fetchUserById: catchAsync(async (req, res) => {
+  getUserById: catchAsync(async (req, res) => {
     const userId = req.params.id;
-    const user = await getUserById(userId);
+    const user = await fetchUserById(userId);
     res.status(200).json(user);
   }),
 
-  modifyUser: catchAsync(async (req, res) => {
+  getMyUser: catchAsync(async (req, res) => {
+    const userId = req.user.id;
+    const user = await fetchMyUser(userId);
+    res.status(200).json(user);
+  }),
+
+  updateUser: catchAsync(async (req, res) => {
     const userId = req.params.id;
     const updatedData = req.body;
-    const updatedUser = await updateUser(userId, updatedData);
+    const updatedUser = await modifyUser(userId, updatedData);
     res.status(200).json(updatedUser);
   }),
 
@@ -42,7 +49,7 @@ const userController = {
   }),
 
   updateMe: catchAsync(async (req, res) => {
-    const updatedUser = await updateMe(req.user.id, req.body);
+    const updatedUser = await modifyMyUser(req.user.id, req.body);
     res.status(200).json(updatedUser);
   }),
 

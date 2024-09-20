@@ -1,6 +1,6 @@
 const catchAsync = require("@/utils/catchAsync");
 const { verifyAccessToken } = require("@/utils/jwtUtils");
-const { getUserById } = require("../use-cases/user");
+const { fetchUserById } = require("../use-cases/user");
 
 const authMiddleware = catchAsync(async (req, res, next) => {
   if (!req.cookies.accessToken) {
@@ -18,7 +18,7 @@ const authMiddleware = catchAsync(async (req, res, next) => {
   }
 
   const decoded = await verifyAccessToken(accessToken);
-  const currentUser = await getUserById(
+  const currentUser = await fetchUserById(
     decoded.userId,
     "The user belonging to this token no longer exists.",
     401

@@ -21,13 +21,14 @@ router.post(
   validate(validateSignupUser),
   authController.signUpUser
 );
-
 router.get("/verify-email/:token", authController.verifyUserEmail);
 router.post("/login/", validate(validateLoginUser), authController.loginUser);
+router.post("/refresh-token/", authController.refreshToken);
 
-// auth
 router.use(authMiddleware);
 
+// me
+router.get("/me/", userController.getMyUser);
 router.delete("/me/", userController.deleteMe);
 router.patch("/me/", validate(validateUpdateMe), userController.updateMe);
 router.patch(
@@ -36,17 +37,15 @@ router.patch(
   authController.updateMyPassword
 );
 
-//router.patch("/update-my-password/", userController.deleteMe);
-
-router.get("/", userController.listUsers);
+// admin
+router.get("/", restrictTo("admin"), userController.getAllUsers);
 
 router.post(
   "/",
   validate(validateCreateUser),
-  //authMiddleware,
   restrictTo(
     "admin",
-    "Only admins can use this route. Use the sign-up endpoint instead."
+    "Only admins can use this endpoint. Use the 'POST sign-up' endpoint instead."
   ),
   userController.registerUser
 );
@@ -54,24 +53,29 @@ router.post(
 router.get(
   "/:id",
   validate(validateGetUser),
-  //authMiddleware,
-  userController.fetchUserById
+  restrictTo(
+    "admin",
+    "Only admins can use this endpoint. Use the 'GET me' endpoint instead."
+  ),
+  userController.getUserById
 );
 
 router.patch(
   "/:id",
+  restrictTo(
+    "admin",
+    "Only admins can use this endpoint. Use the 'UPDATE me' endpoint instead."
+  ),
   validate(validateUpdateUser),
-  //authMiddleware,
-  userController.modifyUser
+  userController.updateUser
 );
 
 router.delete(
   "/:id",
   validate(validateDeleteUser),
-  //authMiddleware,
   restrictTo(
     "admin",
-    "Only admins can use this route. Use the delete-me endpoint instead."
+    "Only admins can use this endpoint. Use the 'DELETE me' endpoint instead."
   ),
   userController.deleteUser
 );
