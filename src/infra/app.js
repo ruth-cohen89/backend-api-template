@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const xssClean = require("xss-clean");
 const rateLimit = require("express-rate-limit");
+const CustomError = require("@/utils/customError");
 
 const app = express();
 
@@ -47,8 +48,10 @@ app.use(limiter);
 app.use(routes);
 
 app.all("*", (req, res, next) => {
-  const error = new Error(`Can't find ${req.originalUrl} on the server 🙄`);
-  error.status = 404;
+  const error = new CustomError(
+    `Can't find ${req.originalUrl} on the server 🙄`,
+    404
+  );
   next(error);
 });
 

@@ -13,7 +13,6 @@ const formatDuplicateKeyError = (err) => {
   return "A duplicate key error occurred.";
 };
 
-// Function to handle JSON syntax errors
 const handleJsonSyntaxError = (res) => {
   return res.status(400).json({ message: "Bad JSON format" });
 };
@@ -21,6 +20,11 @@ const handleJsonSyntaxError = (res) => {
 const errorHandler = (err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
     return handleJsonSyntaxError(res);
+  }
+
+  // Operational errors (including CustomErrors)
+  if (err.isOperational) {
+    return res.status(err.statusCode).json({ message: err.message });
   }
 
   if (err.name === "CastError") {
@@ -31,19 +35,19 @@ const errorHandler = (err, req, res, next) => {
     return res.status(401).json({ message: err.message });
   }
 
-  // Handle MongoDB errors (e.g., duplicate key errors)
+  // MongoDB duplicate key errors)
   if (err.code === 11000) {
     const message = formatDuplicateKeyError(err);
     return res.status(400).json({ message });
   }
 
-  if (err instanceof CustomError) {
-    return res.status(err.statusCode).json({ message: err.message });
-  }
+  // Log unexpected errors
+  console.error("Error stack:", err.stack);
 
-  // For unexpected errors
-  console.error(err);
-  res.status(500).json({ message: "Internal server error." });
+  // Don't leak error details
+  res
+    .status(500)
+    .json({ message: "Internal server error. Please try again later." });
 };
 
 module.exports = errorHandler;
