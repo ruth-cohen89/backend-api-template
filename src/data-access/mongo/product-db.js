@@ -24,6 +24,10 @@ const productDb = {
     return await ProductModel.findById(productId);
   },
 
+  async findOne(data) {
+    return await ProductModel.findOne(data);
+  },
+
   async update(productId, productData) {
     return await ProductModel.findByIdAndUpdate(productId, productData, {
       new: true,

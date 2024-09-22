@@ -24,7 +24,7 @@ const validateGetUser = Joi.object({
 
 const validateUpdateUser = Joi.object({
   params: Joi.object({
-    id: Joi.string().required().error(new Error("ID is required")),
+    id: Joi.string().required().error(new Error("User ID is required")),
   }).required(),
   body: Joi.object({
     username: Joi.string().optional(),

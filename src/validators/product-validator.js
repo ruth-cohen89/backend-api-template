@@ -20,7 +20,9 @@ const validateUpdateProduct = Joi.object({
     price: Joi.number().positive().optional(),
     description: Joi.string().optional().allow(""),
     createdAt: Joi.date().optional(),
-  }).optional(),
+  })
+    .min(1)
+    .optional(),
   query: Joi.object().optional(),
 });
 
