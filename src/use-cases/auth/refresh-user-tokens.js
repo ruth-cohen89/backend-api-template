@@ -4,7 +4,7 @@ const { userDb } = require("../../data-access");
 const { verifyRefreshToken, generateTokens } = require("@/utils/jwtUtils");
 
 const refreshUserTokens = async (refreshToken) => {
-  const decoded = await verifyRefreshToken("refreshToken");
+  const decoded = await verifyRefreshToken(refreshToken);
 
   const user = await userDb.getById(decoded.userId);
   if (!user || !user.active) {

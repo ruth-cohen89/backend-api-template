@@ -41,10 +41,9 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({ message });
   }
 
-  // Log unexpected errors
+  // Log unexpected errors (programmic)
   console.error("Error stack:", err.stack);
 
-  // Don't leak error details
   res
     .status(500)
     .json({ message: "Internal server error. Please try again later." });

@@ -42,7 +42,6 @@ const verifyRefreshToken = (token) => {
         if (err.name === "TokenExpiredError") {
           return reject(new CustomError("Your refresh token has expired", 401));
         }
-        console.log(Object.keys(err));
         return reject(err);
       }
       resolve(decoded);

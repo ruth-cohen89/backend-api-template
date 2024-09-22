@@ -21,8 +21,8 @@ const signUp = async (userData) => {
     verificationTokenExpires: expiration,
   };
 
+  await sendVerificationEmail(newUser, verifyToken);
   const savedUser = await userDb.create(newUser);
-  await sendVerificationEmail(savedUser, verifyToken);
 
   return savedUser;
 };
