@@ -6,7 +6,6 @@ const validateCreateUser = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
     role: Joi.string().optional(),
-    createdAt: Joi.date().default(Date.now),
   }).required(),
   params: Joi.object().optional(),
   query: Joi.object().optional(),
@@ -31,7 +30,6 @@ const validateUpdateUser = Joi.object({
     email: Joi.string().email().optional(),
     password: Joi.string().optional(),
     role: Joi.string().optional(),
-    createdAt: Joi.date().optional(),
   })
     .min(1)
     .optional(),
@@ -51,11 +49,6 @@ const validateSignupUser = Joi.object({
     username: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    role: Joi.string()
-      .valid("user")
-      .default("user")
-      .error(new Error("Role must be 'user'")), // Default to 'user' if role is not provided
-    createdAt: Joi.date().default(Date.now),
   }).required(), // Ensure body is required
   params: Joi.object().optional(),
   query: Joi.object().optional(),
@@ -98,7 +91,6 @@ const validateUpdateMe = Joi.object({
     password: Joi.forbidden().error(
       new Error("Password cannot be updated in this route.")
     ),
-    // firstName: Joi.string().optional(),
   })
     .min(1)
     .required(),

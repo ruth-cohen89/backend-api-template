@@ -1,8 +1,9 @@
 const CustomError = require("../utils/customError");
 
-const handleCastErrorDB = (err) => {
-  const message = `Invalid ${err.path}: ${err.value}.`;
-  return new CustomError(message, 400);
+const handleCastErrorDB = (res, err) => {
+  return res
+    .status(400)
+    .json({ message: `Invalid ${err.path}: ${err.value}.` });
 };
 const formatDuplicateKeyError = (err) => {
   if (err.code === 11000 && err.keyValue) {
@@ -28,7 +29,7 @@ const errorHandler = (err, req, res, next) => {
   }
 
   if (err.name === "CastError") {
-    err = handleCastErrorDB(err);
+    return handleCastErrorDB(res, err);
   }
 
   if (err.name === "JsonWebTokenError") {

@@ -3,7 +3,7 @@ const CustomError = require("../../utils/customError");
 
 const fetchUserById = async (userId) => {
   if (!userId) {
-    throw new CustomError("User ID is required.", 400);
+    throw new CustomError("Product ID is required.", 400);
   }
 
   const user = await userDb.getById(userId);
