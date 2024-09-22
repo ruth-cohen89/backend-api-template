@@ -6,6 +6,7 @@ const {
   updateProduct,
   removeProduct,
   getAllProducts,
+  hardDeleteProduct,
 } = require("../use-cases/product");
 
 const productController = {
@@ -30,6 +31,12 @@ const productController = {
 
   deleteProduct: catchAsync(async (req, res) => {
     const productId = req.params.id;
+
+    const hardDelete = req.query.hardDelete === "true";
+    console.log(req.query.hardDelete, hardDelete);
+    if (hardDelete) await hardDeleteProduct(productId, hardDelete);
+    else await softDeleteProduct(productId, hardDelete);
+
     await removeProduct(productId);
     res.status(204).send();
   }),

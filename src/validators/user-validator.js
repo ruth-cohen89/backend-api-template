@@ -5,7 +5,7 @@ const validateCreateUser = Joi.object({
     username: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    role: Joi.string().optional(),
+    role: Joi.string().valid("admin", "user").optional(),
   }).required(),
   params: Joi.object().optional(),
   query: Joi.object().optional(),

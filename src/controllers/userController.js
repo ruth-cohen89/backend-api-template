@@ -4,9 +4,9 @@ const {
   createUser,
   fetchUserById,
   modifyUser,
-  removeUser,
   fetchAllUsers,
   softDeleteUser,
+  hardDeleteUser,
   modifyMyUser,
   fetchMyUser,
 } = require("../use-cases/user");
@@ -44,7 +44,11 @@ const userController = {
 
   deleteUser: catchAsync(async (req, res) => {
     const userId = req.params.id;
-    await removeUser(userId);
+    const hardDelete = req.query.hardDelete === "true";
+    console.log(req.query.hardDelete, hardDelete);
+    if (hardDelete) await hardDeleteUser(userId, hardDelete);
+    else await softDeleteUser(userId, hardDelete);
+
     res.status(204).send();
   }),
 

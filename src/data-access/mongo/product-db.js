@@ -6,8 +6,7 @@ const productDb = {
     const product = createProduct(
       productData.name,
       productData.price,
-      productData.description,
-      productData.createdAt
+      productData.description
     );
 
     const productDocument = new ProductModel({
@@ -15,6 +14,8 @@ const productDb = {
       price: product.getPrice(),
       description: product.getDescription(),
       createdAt: product.getCreatedAt(),
+      isDeleted: product.isDeleted,
+      deletedAt: product.getDeletedAt,
     });
 
     return await productDocument.save();

@@ -5,6 +5,12 @@ const handleCastErrorDB = (res, err) => {
     .status(400)
     .json({ message: `Invalid ${err.path}: ${err.value}.` });
 };
+
+const handleValidationError = (res, err) => {
+  const errors = Object.values(err.errors).map((error) => error.message);
+  return res.status(400).json({ message: errors.join(", ") });
+};
+
 const formatDuplicateKeyError = (err) => {
   if (err.code === 11000 && err.keyValue) {
     const field = Object.keys(err.keyValue)[0];
@@ -26,6 +32,10 @@ const errorHandler = (err, req, res, next) => {
   // Operational errors (including CustomErrors)
   if (err.isOperational) {
     return res.status(err.statusCode).json({ message: err.message });
+  }
+
+  if (err.name === "ValidationError") {
+    return handleValidationError(res, err);
   }
 
   if (err.name === "CastError") {

@@ -7,6 +7,7 @@ const {
   validateDeleteProduct,
   validateGetProduct,
 } = require("@/validators");
+// TODO: add authentication functionality
 
 const { productController } = require("../../controllers");
 

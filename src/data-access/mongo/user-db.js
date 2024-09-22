@@ -7,12 +7,7 @@ const userDb = {
       userData.username,
       userData.password,
       userData.email,
-      userData.role,
-      userData.active,
-      userData.createdAt,
-      userData.emailVerified,
-      userData.verificationToken,
-      userData.verificationTokenExpires
+      userData.role
     );
 
     const userDocument = new UserModel({

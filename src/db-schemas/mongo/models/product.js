@@ -20,6 +20,15 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  // Soft delete field
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+  deletedAt: {
+    type: Date,
+    default: null,
+  },
 });
 
 const ProductModel = mongoose.model("Product", productSchema);
