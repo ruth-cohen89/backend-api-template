@@ -8,7 +8,7 @@ const removeUser = async (userId) => {
 
   const deleted = await userDb.delete(userId);
   if (!deleted) {
-    throw new CustomError("User not found or not deleted.", 404);
+    throw new CustomError("User not found.", 404);
   }
   return deleted;
 };
