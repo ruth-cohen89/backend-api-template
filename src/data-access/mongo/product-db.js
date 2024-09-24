@@ -21,26 +21,31 @@ const productDb = {
     return await productDocument.save();
   },
 
-  async getById(productId) {
-    return await ProductModel.findById(productId);
+  async getById(productId, filter = {}) {
+    filter.isDeleted = false;
+    return await ProductModel.findOne({ _id: productId, ...filter });
   },
 
   async findOne(data) {
     return await ProductModel.findOne(data);
   },
 
-  async update(productId, productData) {
-    return await ProductModel.findByIdAndUpdate(productId, productData, {
-      new: true,
-    });
+  async update(productId, productData, filter = {}) {
+    filter.isDeleted = false;
+
+    return await ProductModel.findOneAndUpdate(
+      { _id: productId, ...filter },
+      productData,
+      { new: true }
+    );
   },
 
   async delete(productId) {
     return await ProductModel.findByIdAndDelete(productId);
   },
 
-  async getAll() {
-    return await ProductModel.find();
+  async getAll(filter) {
+    return await ProductModel.find(filter);
   },
 };
 

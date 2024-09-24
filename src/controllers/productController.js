@@ -7,6 +7,7 @@ const {
   removeProduct,
   getAllProducts,
   hardDeleteProduct,
+  softDeleteProduct,
 } = require("../use-cases/product");
 
 const productController = {
@@ -33,11 +34,9 @@ const productController = {
     const productId = req.params.id;
 
     const hardDelete = req.query.hardDelete === "true";
-    console.log(req.query.hardDelete, hardDelete);
     if (hardDelete) await hardDeleteProduct(productId, hardDelete);
     else await softDeleteProduct(productId, hardDelete);
 
-    await removeProduct(productId);
     res.status(204).send();
   }),
 

@@ -5,7 +5,7 @@ const softDeleteProduct = async (productId) => {
   const product = await productDb.getById(productId);
   if (!product) throw new CustomError("product not found.", 404);
 
-  if (!product.isDeleted) {
+  if (product.isDeleted) {
     throw new CustomError("Product has already been deleted.", 400);
   }
 

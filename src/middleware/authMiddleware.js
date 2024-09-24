@@ -4,7 +4,9 @@ const { fetchUserById } = require("../use-cases/user");
 
 const authMiddleware = catchAsync(async (req, res, next) => {
   if (!req.cookies.accessToken) {
-    return res.status(401).json({ message: "Access token required" });
+    return res
+      .status(401)
+      .json({ message: "Access token required. Please login" });
   }
 
   const accessToken = req.cookies.accessToken;

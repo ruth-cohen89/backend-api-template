@@ -18,7 +18,7 @@ const updateProduct = async (productId, productData) => {
   const updated = await productDb.update(productId, filteredUpdateData);
 
   if (!updated) {
-    throw new CustomError("Product not found", 404);
+    throw new CustomError("Product not found or has been deleted.", 404);
   }
   return updated;
 };

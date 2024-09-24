@@ -45,7 +45,6 @@ const userController = {
   deleteUser: catchAsync(async (req, res) => {
     const userId = req.params.id;
     const hardDelete = req.query.hardDelete === "true";
-    console.log(req.query.hardDelete, hardDelete);
     if (hardDelete) await hardDeleteUser(userId, hardDelete);
     else await softDeleteUser(userId, hardDelete);
 
