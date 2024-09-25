@@ -1,7 +1,7 @@
 const { productDb } = require("../../data-access");
 const CustomError = require("@/utils/customError");
 
-const updateProduct = async (productId, productData) => {
+const modifyProduct = async (productId, productData) => {
   if (!productId) {
     throw new CustomError("Product ID is required.", 400);
   }
@@ -23,4 +23,4 @@ const updateProduct = async (productId, productData) => {
   return updated;
 };
 
-module.exports = updateProduct;
+module.exports = modifyProduct;

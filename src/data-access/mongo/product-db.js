@@ -44,7 +44,7 @@ const productDb = {
     return await ProductModel.findByIdAndDelete(productId);
   },
 
-  async getAll(filter) {
+  async getAll(filter = {}) {
     return await ProductModel.find(filter);
   },
 };

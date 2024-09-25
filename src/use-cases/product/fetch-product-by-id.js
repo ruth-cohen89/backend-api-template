@@ -1,7 +1,7 @@
 const { productDb } = require("../../data-access");
 const CustomError = require("@/utils/customError");
 
-const getProductById = async (productId) => {
+const fetchProductById = async (productId) => {
   if (!productId) {
     throw new CustomError("Product ID is required.", 400);
   }
@@ -29,4 +29,4 @@ const getProductById = async (productId) => {
 //   return product;
 // };
 
-module.exports = getProductById;
+module.exports = fetchProductById;

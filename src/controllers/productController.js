@@ -1,32 +1,31 @@
 const catchAsync = require("@/utils/catchAsync");
 
 const {
-  createProduct,
-  getProductById,
-  updateProduct,
-  removeProduct,
-  getAllProducts,
+  addProduct,
+  fetchProductById,
+  modifyProduct,
+  fetchAllProducts,
   hardDeleteProduct,
   softDeleteProduct,
 } = require("../use-cases/product");
 
 const productController = {
-  addProduct: catchAsync(async (req, res) => {
+  createProduct: catchAsync(async (req, res) => {
     const productData = req.body;
-    const newProduct = await createProduct(productData);
+    const newProduct = await addProduct(productData);
     res.status(201).json(newProduct);
   }),
 
-  fetchProductById: catchAsync(async (req, res) => {
+  getProductById: catchAsync(async (req, res) => {
     const productId = req.params.id;
-    const product = await getProductById(productId);
+    const product = await fetchProductById(productId);
     res.status(200).json(product);
   }),
 
-  modifyProduct: catchAsync(async (req, res) => {
+  updateProduct: catchAsync(async (req, res) => {
     const productId = req.params.id;
     const updatedData = req.body;
-    const updatedProduct = await updateProduct(productId, updatedData);
+    const updatedProduct = await modifyProduct(productId, updatedData);
     res.status(200).json(updatedProduct);
   }),
 
@@ -40,10 +39,16 @@ const productController = {
     res.status(204).send();
   }),
 
-  listProducts: catchAsync(async (req, res) => {
-    const products = await getAllProducts();
+  getAllProducts: catchAsync(async (req, res) => {
+    const products = await fetchAllProducts();
     res.status(200).json(products);
   }),
+
+  getAllProductsForAdmin: async (req, res) => {
+    const includeDeleted = req.query.includeDeleted === "true";
+    const products = await fetchAllProducts(includeDeleted);
+    return res.json(products);
+  },
 };
 
 module.exports = productController;

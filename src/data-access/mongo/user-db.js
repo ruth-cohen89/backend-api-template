@@ -7,7 +7,8 @@ const userDb = {
       userData.username,
       userData.password,
       userData.email,
-      userData.role
+      userData.role,
+      userData.emailVerified
     );
 
     const userDocument = new UserModel({
@@ -40,8 +41,8 @@ const userDb = {
     return await UserModel.findByIdAndDelete(userId);
   },
 
-  async getAll() {
-    return await UserModel.find();
+  async getAll(filter = {}) {
+    return await UserModel.find(filter);
   },
 };
 

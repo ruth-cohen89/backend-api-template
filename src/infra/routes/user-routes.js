@@ -2,6 +2,7 @@ const express = require("express");
 const validate = require("../../middleware/validate");
 const authMiddleware = require("../../middleware/authMiddleware");
 const restrictTo = require("../../middleware/restrictTo");
+
 const {
   validateCreateUser,
   validateSignupUser,

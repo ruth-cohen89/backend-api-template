@@ -1,15 +1,15 @@
-const createProduct = require("./create-product");
-const getProductById = require("./get-product-by-id");
-const updateProduct = require("./update-product");
+const addProduct = require("./add-product");
+const fetchProductById = require("./fetch-product-by-id");
+const modifyProduct = require("./modify-product");
 const hardDeleteProduct = require("./hard-delete-product");
-const getAllProducts = require("./get-all-products");
+const fetchAllProducts = require("./fetch-all-products");
 const softDeleteProduct = require("./soft-delete-product");
 
 module.exports = {
-  createProduct,
-  getProductById,
-  updateProduct,
+  addProduct,
+  fetchProductById,
+  modifyProduct,
   hardDeleteProduct,
-  getAllProducts,
+  fetchAllProducts,
   softDeleteProduct,
 };

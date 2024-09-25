@@ -3,9 +3,9 @@ function User(
   password,
   email,
   role,
+  emailVerified,
   active,
   createdAt,
-  emailVerified,
   verificationToken,
   verificationTokenExpires
 ) {
