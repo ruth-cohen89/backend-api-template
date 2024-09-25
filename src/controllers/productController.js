@@ -31,10 +31,16 @@ const productController = {
 
   deleteProduct: catchAsync(async (req, res) => {
     const productId = req.params.id;
+    await softDeleteProduct(productId);
+    res.status(204).send();
+  }),
+
+  deleteProductForAdmin: catchAsync(async (req, res) => {
+    const productId = req.params.id;
 
     const hardDelete = req.query.hardDelete === "true";
-    if (hardDelete) await hardDeleteProduct(productId, hardDelete);
-    else await softDeleteProduct(productId, hardDelete);
+    if (hardDelete) await hardDeleteProduct(productId);
+    else await softDeleteProduct(productId);
 
     res.status(204).send();
   }),

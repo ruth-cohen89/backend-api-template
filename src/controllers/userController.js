@@ -27,15 +27,6 @@ const userController = {
 
   getUserById: catchAsync(async (req, res) => {
     const userId = req.params.id;
-    // const currentUser = req.user;
-
-    // if (currentUser.role !== "admin" && currentUser.id !== userId) {
-    //   throw new CustomError(
-    //     "You are not authorized to access this user's data.",
-    //     403
-    //   );
-    // }
-
     const user = await fetchUserById(userId);
     res.status(200).json(user);
   }),
@@ -58,8 +49,8 @@ const userController = {
     const userId = req.params.id;
     const hardDelete = req.query.hardDelete === "true";
 
-    if (hardDelete) await hardDeleteUser(userId, hardDelete);
-    else await softDeleteUser(userId, hardDelete);
+    if (hardDelete) await hardDeleteUser(userId);
+    else await softDeleteUser(userId);
 
     res.status(204).send();
   }),

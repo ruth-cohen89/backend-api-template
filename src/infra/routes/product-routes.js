@@ -15,6 +15,7 @@ const { productController } = require("../../controllers");
 const router = express.Router();
 
 router.get("/", productController.getAllProducts);
+
 router.get(
   "/admin",
   authMiddleware,
@@ -29,6 +30,13 @@ router.get(
 );
 
 router.use(authMiddleware);
+
+router.delete(
+  "/admin/:id",
+  restrictTo("admin", "Access denied. Admins only."),
+  validate(validateDeleteProduct),
+  productController.deleteProductForAdmin
+);
 
 router.post(
   "/",

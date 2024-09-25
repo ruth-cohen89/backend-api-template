@@ -1,7 +1,6 @@
 const catchAsync = require("@/utils/catchAsync");
 const CustomError = require("@/utils/customError");
 
-// Autorization
 const restrictTo = (
   roles,
   customMessage = "You do not have permission to perform this action"
